@@ -1,0 +1,37 @@
+#game_container {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+.element {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.float_speed_1 {
+  transition-duration: 3s;
+}
+.float_speed_2 {
+  transition-duration: 2.5s;
+}
+.float_speed_3 {
+  transition-duration: 2s;
+}
+.float_speed_4 {
+  transition-duration: 1.5s;
+}
+
+.floatDown {
+  transform: translateY(80vh);
+}
+
+/* @keyframes sink {
+  0% {
+    transform: translateY(-200px);
+  }
+
+  100% {
+    transform: translateY(80vh);
+  }
+} */
