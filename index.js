@@ -136,7 +136,8 @@ function removeElement(e) {
   console.log("removeElement kørt");
   // add if statement that defines that if the element is too far down on the page then it can't be clicked
   e.target.dataset.status = "clean";
-  e.target.style.backgroundColor = "blue";
+  e.target.style.backgroundColor = "initial";
+  e.target.style.backgroundImage = 'url("img/bubbles.png")';
   // reset placement to be the original one
   let posX = e.target.getBoundingClientRect().x;
   e.target.style.transform = `translate(${posX}px, -200px)`;
