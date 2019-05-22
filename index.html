@@ -6,15 +6,73 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Spillehjørnet - Danske Spil</title>
     <link rel="stylesheet" href="main.css" />
+    <!-- fonte -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,700, 700i&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Londrina+Solid:100,300,400,900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- fonte -->
   </head>
   <body>
-    <form>
-      <label for="navn">Navn</label>
-      <input type="text" name="navn" id="navn" required />
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" required />
-      <button type="submit">Sign up</button>
-    </form>
+    <div class="container">
+      <div id="spil">
+        <!-- Her skal spillet være -->
+      </div>
+      <form>
+        <label for="navn">Navn</label>
+        <input type="text" name="navn" id="navn" required />
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required />
+        <button type="submit">Sign up</button>
+      </form>
+    </div>
+
+    <section class="section1">
+      <div class="logo">
+        <img src="assets/spillehjoernet_logo.png" alt="Spillehjørnets logo" />
+      </div>
+      <p class="text1">
+        Red miljøet sammen<br />
+        med Danske Spil
+      </p>
+      <div class="fisk"></div>
+      <div class="tang tang1"></div>
+      <div class="tang tang2"></div>
+      <div class="pose"></div>
+      <div class="start"></div>
+      <div class="havbund"></div>
+      <div class="purple_box">
+        <p class="text2">
+          Gennemfør spillet, så donerer Danske Spil
+          <span class="fat_yellow">25 kr.</span> til projektet
+          <span class="italic">Plastfrit Hav</span>
+        </p>
+      </div>
+    </section>
+    <section class="section2">
+      <p class="text3">
+        Plastfrit Hav er et partnerskab mellem Plastindustrien, Plastic Change
+        og <br />Det Økologiske Råd, der skal beskytte havmiljøet mod
+        plastforurening.
+      </p>
+      <div class="streg streg1"></div>
+      <div class="donation">
+        <p class="donation_text1">Foreløbig donation</p>
+        <p class="donation_text2">
+          <span class="fat_yellow big">3375</span> kr.
+        </p>
+      </div>
+      <div class="streg streg2"></div>
+      <p class="text4">
+        Vidste du, at der hvert år skyller
+        <span class="fat">1.000 tons</span> plastik op på den danske
+        vesterhavskyst?
+      </p>
+    </section>
 
     <script src="main.js"></script>
   </body>
