@@ -10,16 +10,16 @@
 }
 
 .float_speed_1 {
-  transition-duration: 3s;
+  transition-duration: 3.4s;
 }
 .float_speed_2 {
-  transition-duration: 2.8s;
+  transition-duration: 3s;
 }
 .float_speed_3 {
-  transition-duration: 2.4s;
+  transition-duration: 2.6s;
 }
 .float_speed_4 {
-  transition-duration: 2s;
+  transition-duration: 2.2s;
 }
 
 .floatDown {

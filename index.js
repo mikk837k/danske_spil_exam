@@ -5,6 +5,8 @@ window.addEventListener("DOMContentLoaded", init);
 let action = "";
 let myJSON;
 let counter;
+let collectedTrash = 0;
+
 const gameContainer = document.querySelector("#game_container");
 
 function init() {
@@ -28,7 +30,7 @@ function createElements() {
   myJSON.forEach(element => {
     let newDiv = document.createElement("div");
     newDiv.classList.add("element");
-    newDiv.dataset.type = "trash";
+    newDiv.dataset.status = "trash";
     newDiv.dataset.action = "remove";
     // newDiv.style.backgroundImage = `url("${element}.png")`;
     newDiv.style.backgroundColor = "red";
@@ -54,7 +56,7 @@ function windowClicked(e) {
 }
 
 function placeElements() {
-  const elementArray = document.querySelectorAll("[data-type=trash]");
+  const elementArray = document.querySelectorAll("[data-status=trash]");
 
   console.log(gameContainer.clientWidth);
 
@@ -81,12 +83,13 @@ function getCoordinateWithinBox(container, elem) {
 
 function startGame() {
   console.log("startGame kørt");
-  const elementArray = document.querySelectorAll("[data-type=trash]");
+  const elementArray = document.querySelectorAll("[data-status=trash]");
   for (let counter = 0; counter < elementArray.length; counter++) {
     setTimeout(() => {
       addAnimation(elementArray[counter], counter);
     }, 500 * counter);
   }
+  playerHealth();
 }
 
 function addAnimation(element, counter) {
@@ -114,16 +117,29 @@ function addAnimation(element, counter) {
   }
 }
 
+function playerHealth() {
+  const elementArray = document.querySelectorAll("[data-status=trash]");
+
+  elementArray.forEach(element => {
+    element.addEventListener("transitionend", () => {
+      element.style.pointerEvents = "none";
+    });
+  });
+}
+
 function removeElement(e) {
   console.log(e);
   console.log("removeElement kørt");
   // add if statement that defines that if the element is too far down on the page then it can't be clicked
+  e.target.dataset.status = "clean";
+  e.target.style.backgroundColor = "blue";
   // reset placement to be the original one
-  e.target.style.display = "none";
+  let posX = e.target.getBoundingClientRect().x;
+  e.target.style.transform = `translate(${posX}px, -200px)`;
 }
 
 function incrementCounter() {
-  counter++;
+  collectedTrash++;
   // Add counter to field in HTML to show amount of pieces collected
-  console.log(counter);
+  console.log(collectedTrash);
 }
