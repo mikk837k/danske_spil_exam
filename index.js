@@ -62,14 +62,10 @@ function placeElements() {
 
   // place elements randomly on X axis using transform translate
   for (counter = 0; counter < elementArray.length; counter++) {
-    console.log(elementArray[counter]);
-
     let stringifyNumb = getCoordinateWithinBox(
       gameContainer,
       elementArray[counter]
     ).toString();
-
-    console.log(stringifyNumb);
 
     elementArray[
       counter
@@ -89,13 +85,10 @@ function startGame() {
       addAnimation(elementArray[counter], counter);
     }, 500 * counter);
   }
-  playerHealth();
+  playerHealthStatus();
 }
 
 function addAnimation(element, counter) {
-  console.log("addanimation kørt");
-  console.log(element);
-
   let Xpos = element.getBoundingClientRect().x;
 
   if (counter <= 5) {
@@ -117,13 +110,32 @@ function addAnimation(element, counter) {
   }
 }
 
-function playerHealth() {
+function playerHealthStatus() {
   const elementArray = document.querySelectorAll("[data-status=trash]");
-
+  let playerHealth = 3;
   elementArray.forEach(element => {
     element.addEventListener("transitionend", () => {
       element.style.pointerEvents = "none";
+      if (element.dataset.status === "trash") {
+        playerHealth--;
+      }
+      if (playerHealth == 0) {
+        gameOver(elementArray);
+        console.log("stop spillet");
+      }
     });
+  });
+}
+
+function gameOver(elementArray) {
+  elementArray.forEach(element => {
+    console.log(element);
+    let compstyles = window.getComputedStyle(element);
+
+    console.log(compstyles.getPropertyValue("transform"));
+
+    element.style.transform = compstyles.getPropertyValue("transform");
+    // element.style.animationPlayState = "paused";
   });
 }
 
