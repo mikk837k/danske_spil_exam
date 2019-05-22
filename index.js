@@ -88,6 +88,8 @@ function startGame() {
   playerHealthStatus();
 }
 
+function checkHealth() {}
+
 function addAnimation(element, counter) {
   let Xpos = element.getBoundingClientRect().x;
 
@@ -127,17 +129,7 @@ function playerHealthStatus() {
   });
 }
 
-function gameOver(elementArray) {
-  elementArray.forEach(element => {
-    console.log(element);
-    let compstyles = window.getComputedStyle(element);
-
-    console.log(compstyles.getPropertyValue("transform"));
-
-    element.style.transform = compstyles.getPropertyValue("transform");
-    // element.style.animationPlayState = "paused";
-  });
-}
+function gameOver(elementArray) {}
 
 function removeElement(e) {
   console.log(e);
