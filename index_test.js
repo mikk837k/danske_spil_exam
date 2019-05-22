@@ -4,10 +4,8 @@ window.addEventListener("DOMContentLoaded", init);
 
 let action = "";
 let myJSON;
-let counter;
 let playerHealth = 3;
 let collectedTrash = 0;
-
 const gameContainer = document.querySelector("#game_container");
 
 function init() {
@@ -62,7 +60,7 @@ function placeElements() {
   console.log(gameContainer.clientWidth);
 
   // place elements randomly on X axis using transform translate
-  for (counter = 0; counter < elementArray.length; counter++) {
+  for (let counter = 0; counter < elementArray.length; counter++) {
     let stringifyNumb = getCoordinateWithinBox(
       gameContainer,
       elementArray[counter]
@@ -80,20 +78,24 @@ function getCoordinateWithinBox(container, elem) {
 
 function startGame() {
   console.log("startGame kørt");
-  const elementArray = document.querySelectorAll("[data-status=trash]");
-
   // Can this be done by using forEach? note the delay!
-  for (let counter = 0; counter < elementArray.length; counter++) {
-    setTimeout(() => {
-      addAnimation(elementArray[counter], counter);
-    }, 500 * counter);
-  }
   playerHealthStatus();
+  checkHealth();
 }
 
-function checkHealth() {}
+function checkHealth() {
+  const elementArray = document.querySelectorAll("[data-status=trash]");
+  for (let counter = 0; counter < elementArray.length; counter++) {
+    if (playerHealth !== 0) {
+      setTimeout(() => {
+        addAnimation(elementArray[counter], counter);
+      }, 1000 * counter);
+    }
+  }
+}
 
 function addAnimation(element, counter) {
+  console.log(element);
   let Xpos = element.getBoundingClientRect().x;
 
   if (counter <= 5) {
@@ -101,21 +103,22 @@ function addAnimation(element, counter) {
     element.style.transform = `translate(${Xpos}px, 80vh)`;
     element.classList.add("float_speed_1");
   }
-  if (counter > 5 && counter < 10) {
+  if (counter > 5 && counter <= 10) {
     element.style.transform = `translate(${Xpos}px, 80vh)`;
     element.classList.add("float_speed_2");
   }
-  if (counter > 10 && counter < 15) {
+  if (counter >= 11 && counter <= 15) {
     element.style.transform = `translate(${Xpos}px, 80vh)`;
     element.classList.add("float_speed_3");
   }
-  if (counter > 15 && counter < 28) {
+  if (counter >= 16 && counter <= 28) {
     element.style.transform = `translate(${Xpos}px, 80vh)`;
     element.classList.add("float_speed_4");
   }
 }
 
 function playerHealthStatus() {
+  console.log("playerHealthStatus");
   const elementArray = document.querySelectorAll("[data-status=trash]");
   elementArray.forEach(element => {
     element.addEventListener("transitionend", () => {
@@ -127,7 +130,9 @@ function playerHealthStatus() {
   });
 }
 
-function gameOver(elementArray) {}
+function gameOver() {
+  console.log("gameover");
+}
 
 function removeElement(e) {
   console.log(e);
@@ -143,7 +148,7 @@ function removeElement(e) {
 
 function incrementCounter() {
   collectedTrash++;
-  document.querySelector("h1").textContent = collectedTrash;
+  document.querySelector("#score h1").textContent = collectedTrash;
   // Add counter to field in HTML to show amount of pieces collected
   console.log(collectedTrash);
 }
