@@ -1,7 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+}
 #game_container {
   height: 667px;
   width: 375px;
   position: relative;
+  overflow: hidden;
 }
 #score {
   position: absolute;
@@ -29,6 +34,14 @@ button {
   background-size: contain;
 }
 
+#school_of_fish {
+  position: absolute;
+  width: 50vw;
+  height: 40vw;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .float_speed_1 {
   transition-duration: 3s;
 }
@@ -46,12 +59,6 @@ button {
   transform: translateY(80vh);
 }
 
-/* @keyframes sink {
-  0% {
-    transform: translateY(-200px);
-  }
-
-  100% {
-    transform: translateY(80vh);
-  }
-} */
+.flipImage {
+  transition-duration: 500ms;
+}

@@ -80,17 +80,24 @@ function startGame() {
   console.log("startGame kørt");
   // Can this be done by using forEach? note the delay!
   playerHealthStatus();
-  checkHealth();
+  checkValidity();
 }
 
-function checkHealth() {
+function checkValidity() {
   const elementArray = document.querySelectorAll("[data-status=trash]");
   for (let counter = 0; counter < elementArray.length; counter++) {
-    if (playerHealth !== 0) {
-      setTimeout(() => {
-        addAnimation(elementArray[counter], counter);
-      }, 1000 * counter);
-    }
+    setTimeout(() => {
+      checkHealth(elementArray[counter], counter);
+    }, 1000 * counter);
+  }
+}
+
+function checkHealth(element, counter) {
+  console.log(playerHealth);
+  if (playerHealth === 0) {
+    gameOver();
+  } else {
+    addAnimation(element, counter);
   }
 }
 
@@ -125,6 +132,7 @@ function playerHealthStatus() {
       element.style.pointerEvents = "none";
       if (element.dataset.status === "trash") {
         playerHealth--;
+        console.log(playerHealth);
       }
     });
   });

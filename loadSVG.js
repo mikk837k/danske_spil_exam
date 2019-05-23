@@ -23,4 +23,11 @@ function loadSVG() {
         .querySelector("#baggrund")
         .insertAdjacentHTML("afterbegin", mySVG);
     });
+  fetch("img/school_of_fish.svg")
+    .then(response => response.text())
+    .then(mySVG => {
+      document
+        .querySelector("#school_of_fish")
+        .insertAdjacentHTML("afterbegin", mySVG);
+    });
 }
