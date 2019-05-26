@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="main.css" />
     <!-- fonte -->
     <link
-      href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,700, 700i&display=swap"
+      href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,700,700i&display=swap"
       rel="stylesheet"
     />
     <link
@@ -18,23 +18,23 @@
     <!-- fonte -->
   </head>
   <body>
-    <div class="container">
-      <div id="spil">
-        <!-- Her skal spillet være -->
-      </div>
-      <form>
-        <label for="navn">Navn</label>
-        <input type="text" name="navn" id="navn" required />
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required />
-        <button type="submit">Sign up</button>
-      </form>
-    </div>
-
     <section class="section1">
+      <div class="container">
+        <div class="spil">
+          <!-- Her skal spillet være -->
+        </div>
+        <form class="form">
+          <label for="navn">Navn</label>
+          <input type="text" name="navn" id="navn" required />
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" required />
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
       <div class="logo">
         <img src="assets/spillehjoernet_logo.png" alt="Spillehjørnets logo" />
       </div>
+      <div class="logo_text">Udbydes af Danske Licens Spil A/S</div>
       <p class="text1">
         Red miljøet sammen<br />
         med Danske Spil
@@ -53,9 +53,17 @@
           <span class="italic">Plastfrit Hav</span>
         </p>
       </div>
+      <p class="text text_extra">
+        Plastfrit Hav er et partnerskab mellem Plastindustrien, Plastic Change
+        og Det Økologiske Råd, der skal beskytte havmiljøet mod plastforurening.
+      </p>
+      <div class="fill"></div>
+      <div class="chokolade"></div>
+      <div class="can"></div>
+      <div class="batteri"></div>
     </section>
     <section class="section2">
-      <p class="text3">
+      <p class="text text3">
         Plastfrit Hav er et partnerskab mellem Plastindustrien, Plastic Change
         og Det Økologiske Råd, der skal beskytte havmiljøet mod plastforurening.
       </p>
@@ -72,6 +80,7 @@
         <span class="fat">1.000 tons</span> plastik op på den danske
         vesterhavskyst?
       </p>
+      <div class="trash"></div>
     </section>
 
     <script src="main.js"></script>
