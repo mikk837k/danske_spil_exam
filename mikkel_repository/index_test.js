@@ -31,8 +31,8 @@ function createElements() {
     newDiv.classList.add("element");
     newDiv.dataset.status = "trash";
     newDiv.dataset.action = "remove";
-    // newDiv.style.backgroundImage = `url("${element}.png")`;
-    newDiv.style.backgroundColor = "red";
+    newDiv.style.backgroundImage = `url("img/${element}.svg")`;
+    // newDiv.style.backgroundColor = "red";
     gameContainer.appendChild(newDiv);
   });
   placeElements();
@@ -107,19 +107,19 @@ function addAnimation(element, counter) {
 
   if (counter <= 5) {
     // element.classList.add("floatDown");
-    element.style.transform = `translate(${Xpos}px, 80vh)`;
+    element.style.transform = `translate(${Xpos}px, 85vh)`;
     element.classList.add("float_speed_1");
   }
   if (counter > 5 && counter <= 10) {
-    element.style.transform = `translate(${Xpos}px, 80vh)`;
+    element.style.transform = `translate(${Xpos}px, 85vh)`;
     element.classList.add("float_speed_2");
   }
   if (counter >= 11 && counter <= 15) {
-    element.style.transform = `translate(${Xpos}px, 80vh)`;
+    element.style.transform = `translate(${Xpos}px, 85vh)`;
     element.classList.add("float_speed_3");
   }
-  if (counter >= 16 && counter <= 28) {
-    element.style.transform = `translate(${Xpos}px, 80vh)`;
+  if (counter >= 16 && counter <= 31) {
+    element.style.transform = `translate(${Xpos}px, 85vh)`;
     element.classList.add("float_speed_4");
   }
 }
