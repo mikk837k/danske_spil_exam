@@ -36,28 +36,45 @@ button {
   background-size: contain;
 }
 
+#healthBar {
+  right: 0px;
+  top: 0px;
+  width: 150px;
+  height: 50px;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+}
+
+.heart {
+  flex-grow: 1;
+}
+
 #school_of_fish {
   position: absolute;
-  width: 50vw;
-  height: 40vw;
+  width: 250px;
+  height: 80px;
   background-repeat: no-repeat;
   background-size: contain;
 }
 
 #main_character {
+  bottom: 50px;
+  left: 250px;
   position: absolute;
   width: 20vw;
   height: 20vw;
-  background-image: url(img/fish_spritesheet.png);
+  background-image: url(../img/fish_spritesheet.png);
   background-size: 400% 200%;
-}
-
-.main_fish_swimcycle {
   animation-name: swim;
-  animation-duration: 1s;
+  animation-duration: 1.5s;
   animation-timing-function: steps(4);
   animation-iteration-count: infinite;
 }
+
+/* .main_fish_swimcycle {
+  
+} */
 
 @keyframes swim {
   0% {
@@ -70,13 +87,13 @@ button {
 
 #seaweed {
   position: absolute;
-  background-image: url(img/seeweed_spritesheet.png);
+  bottom: 45px;
+  width: 20vw;
+  height: 17vw;
+  background-image: url(../img/seeweed_spritesheet.png);
   background-size: 700% 100%;
-}
-
-.seaweed_floatcycle {
   animation-name: float;
-  animation-duration: 2s;
+  animation-duration: 3s;
   animation-timing-function: steps(7);
   animation-iteration-count: infinite;
 }
@@ -86,20 +103,24 @@ button {
     background-position: 0 0;
   }
   100% {
-    background-position: -700% 0%;
+    background-position: 700% 0%;
   }
 }
 
 .float_speed_1 {
+  transition-timing-function: linear;
   transition-duration: 3s;
 }
 .float_speed_2 {
+  transition-timing-function: linear;
   transition-duration: 2.6s;
 }
 .float_speed_3 {
+  transition-timing-function: linear;
   transition-duration: 2.2s;
 }
 .float_speed_4 {
+  transition-timing-function: linear;
   transition-duration: 1.8s;
 }
 
