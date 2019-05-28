@@ -31,12 +31,12 @@ function randomYPos(yPos, xPos) {
 }
 
 function chooseDirection(yPos, xPos) {
-  console.log("generateNewYPos", yPos);
+  //   console.log("generateNewYPos", yPos);
 
   schoolOfFish.style.transitionDuration = "0";
 
   if (elementIsToRight === true) {
-    console.log(yPos);
+    // console.log(yPos);
     schoolOfFish.style.transitionDuration = "200ms";
     schoolOfFish.style.transform = `translate(${xPos}px, ${yPos}px) scaleX(1)`;
     setTimeout(() => {
@@ -55,7 +55,7 @@ function chooseDirection(yPos, xPos) {
 
 function animateLeft(yPos) {
   let xPos = calculateEndPosLeft(containerXpos, schoolOfFish).toString();
-  console.log("animateLeft", xPos, yPos);
+  //   console.log("animateLeft", xPos, yPos);
 
   schoolOfFish.style.transform = `translate(${xPos}px, ${yPos}px) scaleX(1)`;
   schoolOfFish.style.transitionDuration = "5s";
@@ -71,7 +71,7 @@ function animateLeft(yPos) {
 function animateRight(yPos) {
   let xPos = calculateEndPosRight(gameContainer, schoolOfFish).toString();
 
-  console.log("animateRight", xPos, yPos);
+  //   console.log("animateRight", xPos, yPos);
   schoolOfFish.style.transitionDuration = "5s";
   schoolOfFish.style.transitionTimingFunction = "linear";
   schoolOfFish.style.transform = `translate(${xPos}px, ${yPos}px) scaleX(-1)`;

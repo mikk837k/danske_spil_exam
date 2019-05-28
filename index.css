@@ -3,6 +3,8 @@ body {
   padding: 0;
 }
 #game_container {
+  /* height: 46.319vw;
+  width: 26vw; */
   height: 667px;
   width: 375px;
   position: relative;
@@ -40,6 +42,52 @@ button {
   height: 40vw;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+#main_character {
+  position: absolute;
+  width: 20vw;
+  height: 20vw;
+  background-image: url(img/fish_spritesheet.png);
+  background-size: 400% 200%;
+}
+
+.main_fish_swimcycle {
+  animation-name: swim;
+  animation-duration: 1s;
+  animation-timing-function: steps(4);
+  animation-iteration-count: infinite;
+}
+
+@keyframes swim {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 400% 0%;
+  }
+}
+
+#seaweed {
+  position: absolute;
+  background-image: url(img/seeweed_spritesheet.png);
+  background-size: 700% 100%;
+}
+
+.seaweed_floatcycle {
+  animation-name: float;
+  animation-duration: 2s;
+  animation-timing-function: steps(7);
+  animation-iteration-count: infinite;
+}
+
+@keyframes float {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -700% 0%;
+  }
 }
 
 .float_speed_1 {
