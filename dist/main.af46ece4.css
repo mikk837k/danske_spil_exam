@@ -168,7 +168,7 @@ body {
   justify-self: end;
   /* background-image: url(static/fisk.svg);
   background-size: 100%; */
-  background-image: url(img/fish_spritesheet.png);
+  background-image: url(/fish_spritesheet.a4579460.png);
   background-size: 400% 200%;
   /* background-repeat: no-repeat; */
   width: 53vw;
@@ -205,7 +205,7 @@ body {
 .pose {
   grid-column: 2 / span 1;
   grid-row: 3 / span 1;
-  background-image: url(static/skraldepose.svg);
+  background-image: url(/skraldepose.a1a86a3e.svg);
   background-size: 100%;
   background-repeat: no-repeat;
   width: 16vw;
@@ -297,7 +297,7 @@ body {
 .start {
   grid-column: 2 / span 1;
   grid-row: 4 / span 1;
-  background-image: url(static/start.svg);
+  background-image: url(/start.e702f8ab.svg);
   background-size: 100%;
   background-repeat: no-repeat;
   width: 40vw;
@@ -342,7 +342,7 @@ body {
 
 .tang {
   /* background-image: url(static/tang.svg); */
-  background-image: url(img/seeweed_spritesheet.png);
+  background-image: url(/seeweed_spritesheet.b385ca3e.png);
   /* background-size: 100%; */
   background-size: 700% 100%;
   /* background-repeat: no-repeat; */
@@ -486,7 +486,7 @@ body {
 .havbund {
   grid-column: 1 / span 3;
   grid-row: 4 / span 1;
-  background-image: url(static/havbund.svg);
+  background-image: url(/havbund.2e344e01.svg);
   background-size: 100%;
   width: 100vw;
   height: 27vw;
@@ -521,7 +521,7 @@ body {
   .chokolade {
     grid-column: 2 / span 1;
     grid-row: 4 / span 1;
-    background-image: url(static/chokoladeplast.svg);
+    background-image: url(/chokoladeplast.321bd38a.svg);
     background-size: 100%;
     background-repeat: no-repeat;
     width: 18vw;
@@ -557,7 +557,7 @@ body {
 }
 @media only screen and (min-width: 1200px) {
   .can {
-    background-image: url(static/can.svg);
+    background-image: url(/can.e4de338e.svg);
     background-size: 100%;
     background-repeat: no-repeat;
     width: 100px;
@@ -571,7 +571,7 @@ body {
 }
 @media only screen and (min-width: 1200px) {
   .batteri {
-    background-image: url(static/batteri.svg);
+    background-image: url(/batteri.8f952c53.svg);
     background-size: 100%;
     background-repeat: no-repeat;
     width: 50px;
@@ -898,7 +898,7 @@ body {
 .trash {
   grid-column: 2 / span 1;
   grid-row: 5 / span 1;
-  background-image: url(static/sixpackplast.svg);
+  background-image: url(/sixpackplast.89828289.svg);
   background-size: 100%;
   background-repeat: no-repeat;
   width: 25vw;
@@ -941,3 +941,6 @@ body {
   }
 }
 /* /section2 */
+
+
+/*# sourceMappingURL=/main.af46ece4.css.map */

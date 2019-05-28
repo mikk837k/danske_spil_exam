@@ -1,4 +1,15 @@
 "use strict";
+
+import { CountUp } from "countup.js";
+
+const count_container = document.querySelector(".big");
+
+window.addEventListener("load", () => {
+  console.log("test");
+  let countUp = new CountUp(count_container, 3375);
+  countUp.start();
+});
+
 const form = document.querySelector("form");
 
 form.addEventListener("submit", e => {
