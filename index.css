@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+#game_container {
+  height: 667px;
+  width: 375px;
+  position: relative;
+  overflow: hidden;
+}
+#score {
+  position: absolute;
+  right: 10vw;
+  z-index: 5;
+}
+
+button {
+  position: absolute;
+  z-index: 5;
+}
+
+#forgrund {
+  position: absolute;
+}
+
+#baggrund {
+  position: absolute;
+}
+.element {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#school_of_fish {
+  position: absolute;
+  width: 50vw;
+  height: 40vw;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.float_speed_1 {
+  transition-duration: 3s;
+}
+.float_speed_2 {
+  transition-duration: 2.6s;
+}
+.float_speed_3 {
+  transition-duration: 2.2s;
+}
+.float_speed_4 {
+  transition-duration: 1.8s;
+}
+
+.floatDown {
+  transform: translateY(80vh);
+}
+
+.flipImage {
+  transition-duration: 500ms;
+}
