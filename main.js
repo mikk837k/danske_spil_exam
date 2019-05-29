@@ -1,6 +1,6 @@
 "use strict";
 
-import { CountUp } from "countup.js";
+import { CountUp } from "CountUp.js";
 
 const count_container = document.querySelector(".big");
 

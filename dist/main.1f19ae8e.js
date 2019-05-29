@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"node_modules/countup.js/dist/countUp.min.js":[function(require,module,exports) {
+})({"node_modules/CountUp.js/dist/countUp.min.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -214,12 +214,12 @@ exports.CountUp = CountUp;
 },{}],"main.js":[function(require,module,exports) {
 "use strict";
 
-var _countup = require("countup.js");
+var _CountUp = require("CountUp.js");
 
 var count_container = document.querySelector(".big");
 window.addEventListener("load", function () {
   console.log("test");
-  var countUp = new _countup.CountUp(count_container, 3375);
+  var countUp = new _CountUp.CountUp(count_container, 3375);
   countUp.start();
 });
 var form = document.querySelector("form");
@@ -264,7 +264,7 @@ function post(newSubmit) {
     //   });
   });
 }
-},{"countup.js":"node_modules/countup.js/dist/countUp.min.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"CountUp.js":"node_modules/CountUp.js/dist/countUp.min.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -292,7 +292,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53086" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54836" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

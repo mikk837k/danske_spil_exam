@@ -120,8 +120,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"animations.js":[function(require,module,exports) {
 "use strict";
 
-window.addEventListener("DOMContentLoaded", init); // Karo
-
+window.addEventListener("DOMContentLoaded", init);
 var gameContainer = document.querySelector("#game_container");
 var schoolOfFish = document.querySelector("#school_of_fish");
 var elementIsToRight = true;
@@ -232,7 +231,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53086" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54836" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

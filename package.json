@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/karo0052/danske_spil_exam#readme",
   "dependencies": {
-    "countup.js": "^2.0.4"
+    "countup.js": "^2.0.4",
+    "static": "^2.0.0"
   },
   "devDependencies": {
     "parcel-plugin-static-files-copy": "^2.1.1"

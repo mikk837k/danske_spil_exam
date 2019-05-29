@@ -128,29 +128,28 @@ function init() {
 
 function loadSVG() {
   console.log("load the svg");
-  fetch("static/forgrund.svg").then(function (response) {
+  fetch("forgrund.svg").then(function (response) {
     return response.text();
   }).then(function (mySVG) {
     document.querySelector("#forgrund").insertAdjacentHTML("afterbegin", mySVG);
   });
-  fetch("static/baggrund.svg").then(function (response) {
+  fetch("baggrund.svg").then(function (response) {
     return response.text();
   }).then(function (mySVG) {
     document.querySelector("#baggrund").insertAdjacentHTML("afterbegin", mySVG);
   });
-  fetch("static/school_of_fish.svg").then(function (response) {
+  fetch("school_of_fish.svg").then(function (response) {
     return response.text();
   }).then(function (mySVG) {
     document.querySelector("#school_of_fish").insertAdjacentHTML("afterbegin", mySVG);
-  });
-  fetch("static/hearth.svg").then(function (response) {
-    return response.text();
-  }).then(function (mySVG) {
-    var heartElement = document.querySelectorAll(".heart");
-    heartElement.forEach(function (element) {
-      element.insertAdjacentHTML("afterbegin", mySVG);
-    });
-  });
+  }); // fetch("heart.svg")
+  //   .then(response => response.text())
+  //   .then(mySVG => {
+  //     const heartElement = document.querySelectorAll(".heart");
+  //     heartElement.forEach(element => {
+  //       element.insertAdjacentHTML("afterbegin", mySVG);
+  //     });
+  //   });
 }
 },{}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -180,7 +179,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53086" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54836" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

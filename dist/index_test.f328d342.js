@@ -117,10 +117,17 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"index_test.js":[function(require,module,exports) {
+})({"static/garbage.json":[function(require,module,exports) {
+module.exports = ["plasticbag", "chipsbag", "candywrapper", "candywrapper2", "can", "straw", "battery", "beerholder", "milkcan", "can2", "tube", "waterbottle", "plasticbag", "chipsbag", "candywrapper", "candywrapper2", "can", "straw", "battery", "beerholder", "milkcan", "can2", "tube", "waterbottle", "plasticbag", "chipsbag", "can", "straw", "battery", "beerholder", "waterbottle"];
+},{}],"index_test.js":[function(require,module,exports) {
 "use strict";
 
+var _garbage = _interopRequireDefault(require("/static/garbage.json"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 window.addEventListener("DOMContentLoaded", init);
+console.log(_garbage.default);
 var action = "";
 var myJSON;
 var playerHealth = 3;
@@ -130,29 +137,31 @@ var gameContainer = document.querySelector("#game_container");
 
 function init() {
   console.log("init kørt");
-  document.querySelector("#game_container").addEventListener("mousedown", windowClicked);
-  getJSON();
-}
+  console.log(_garbage.default);
+  document.querySelector("#game_container").addEventListener("mousedown", windowClicked); // getJSON();
 
-function getJSON() {
-  fetch("garbage.json").then(function (jsonData) {
-    return jsonData.json();
-  }).then(function (jsonData) {
-    myJSON = jsonData;
-    createElements();
-  });
-}
+  createElements();
+} // function getJSON() {
+//   fetch("garbage.json")
+//     .then(jsonData => jsonData.json())
+//     .then(jsonData => {
+//       myJSON = jsonData;
+//       createElements();
+//     });
+// }
+
 
 function createElements() {
-  myJSON.forEach(function (element) {
+  _garbage.default.forEach(function (element) {
     var newDiv = document.createElement("div");
     newDiv.classList.add("element");
     newDiv.dataset.status = "trash";
     newDiv.dataset.action = "remove";
-    newDiv.style.backgroundImage = "url(\"../img/".concat(element, ".svg\")"); // newDiv.style.backgroundColor = "red";
+    newDiv.style.backgroundImage = "url(\"".concat(element, ".svg\")"); // newDiv.style.backgroundColor = "red";
 
     gameContainer.appendChild(newDiv);
   });
+
   placeElements();
 }
 
@@ -221,25 +230,26 @@ function checkHealth(element, counter) {
 function addAnimation(element, counter) {
   // console.log(element);
   var Xpos = element.getBoundingClientRect().x;
+  var gameContainerXpos = gameContainer.getBoundingClientRect().x;
 
   if (counter <= 5) {
     // element.classList.add("floatDown");
-    element.style.transform = "translate(".concat(Xpos, "px, 580px)");
+    element.style.transform = "translate(".concat(Xpos - gameContainerXpos, "px, 580px)");
     element.classList.add("float_speed_1");
   }
 
   if (counter > 5 && counter <= 10) {
-    element.style.transform = "translate(".concat(Xpos, "px, 580px)");
+    element.style.transform = "translate(".concat(Xpos - gameContainerXpos, "px, 580px)");
     element.classList.add("float_speed_2");
   }
 
   if (counter >= 11 && counter <= 15) {
-    element.style.transform = "translate(".concat(Xpos, "px, 580px)");
+    element.style.transform = "translate(".concat(Xpos - gameContainerXpos, "px, 580px)");
     element.classList.add("float_speed_3");
   }
 
   if (counter >= 16 && counter <= 31) {
-    element.style.transform = "translate(".concat(Xpos, "px, 580px)");
+    element.style.transform = "translate(".concat(Xpos - gameContainerXpos, "px, 580px)");
     element.classList.add("float_speed_4");
   }
 }
@@ -290,7 +300,7 @@ function incrementCounter() {
   document.querySelector("#score h1").textContent = collectedTrash; // Add counter to field in HTML to show amount of pieces collected
   // console.log(collectedTrash);
 }
-},{}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"/static/garbage.json":"static/garbage.json"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -318,7 +328,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53086" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54836" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
