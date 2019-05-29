@@ -117,79 +117,94 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
+})({"animations.js":[function(require,module,exports) {
+"use strict";
 
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
+window.addEventListener("DOMContentLoaded", init); // Karo
+
+var gameContainer = document.querySelector("#game_container");
+var schoolOfFish = document.querySelector("#school_of_fish");
+var elementIsToRight = true;
+var containerXpos = gameContainer.getBoundingClientRect().x;
+
+function init() {
+  console.log("init");
+  randomStartPos();
+}
+
+function randomStartPos() {
+  console.log("randomStartPos");
+  var yPos = calculateYPos(gameContainer, schoolOfFish).toString();
+  var xPos = calculateEndPosRight(gameContainer, schoolOfFish).toString();
+  schoolOfFish.style.transform = "translate(".concat(xPos, "px, ").concat(yPos, "px)");
+  console.log(yPos, xPos);
+  chooseDirection(yPos);
+}
+
+function randomYPos(yPos, xPos) {
+  var newYpos = calculateYPos(gameContainer, schoolOfFish).toString();
+  schoolOfFish.style.transform = "translate(".concat(newYpos, "px, ").concat(yPos, "px)");
+  chooseDirection(newYpos, xPos);
+}
+
+function chooseDirection(yPos, xPos) {
+  //   console.log("generateNewYPos", yPos);
+  schoolOfFish.style.transitionDuration = "0";
+
+  if (elementIsToRight === true) {
+    // console.log(yPos);
+    schoolOfFish.style.transitionDuration = "200ms";
+    schoolOfFish.style.transform = "translate(".concat(xPos, "px, ").concat(yPos, "px) scaleX(1)");
+    setTimeout(function () {
+      animateLeft(yPos);
+    }, 1000);
+  } else {
+    schoolOfFish.style.transitionDuration = "200ms";
+    schoolOfFish.style.transform = "translate(".concat(xPos, "px, ").concat(yPos, "px) scaleX(-1)");
+    setTimeout(function () {
+      animateRight(yPos);
+    }, 1000);
   }
+} // Animate school of fish
 
-  return bundleURL;
+
+function animateLeft(yPos) {
+  var xPos = calculateEndPosLeft(containerXpos, schoolOfFish).toString(); //   console.log("animateLeft", xPos, yPos);
+
+  schoolOfFish.style.transform = "translate(".concat(xPos, "px, ").concat(yPos, "px) scaleX(1)");
+  schoolOfFish.style.transitionDuration = "5s";
+  schoolOfFish.style.transitionTimingFunction = "linear";
+  elementIsToRight = false;
+  setTimeout(function () {
+    randomYPos(yPos, xPos);
+  }, 10000);
 }
 
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+function animateRight(yPos) {
+  var xPos = calculateEndPosRight(gameContainer, schoolOfFish).toString(); //   console.log("animateRight", xPos, yPos);
 
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
+  schoolOfFish.style.transitionDuration = "5s";
+  schoolOfFish.style.transitionTimingFunction = "linear";
+  schoolOfFish.style.transform = "translate(".concat(xPos, "px, ").concat(yPos, "px) scaleX(-1)");
+  elementIsToRight = true;
+  setTimeout(function () {
+    randomYPos(yPos, xPos);
+  }, 10000);
+} // Position calculations
 
-  return '/';
+
+function calculateYPos(container, elem) {
+  return Math.floor(Math.random() * (container.clientHeight - elem.clientWidth));
 }
 
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+function calculateEndPosLeft(container, elem) {
+  return container - elem.clientWidth;
 }
 
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
+function calculateEndPosRight(container, elem) {
+  return container.clientWidth + elem.clientWidth;
 }
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"main.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./img/fish_spritesheet.png":[["fish_spritesheet.a4579460.png","img/fish_spritesheet.png"],"img/fish_spritesheet.png"],"./static/skraldepose.svg":[["skraldepose.a1a86a3e.svg","static/skraldepose.svg"],"static/skraldepose.svg"],"./static/start.svg":[["start.e702f8ab.svg","static/start.svg"],"static/start.svg"],"./img/seeweed_spritesheet.png":[["seeweed_spritesheet.b385ca3e.png","img/seeweed_spritesheet.png"],"img/seeweed_spritesheet.png"],"./static/havbund.svg":[["havbund.2e344e01.svg","static/havbund.svg"],"static/havbund.svg"],"./static/chokoladeplast.svg":[["chokoladeplast.321bd38a.svg","static/chokoladeplast.svg"],"static/chokoladeplast.svg"],"./static/can.svg":[["can.e4de338e.svg","static/can.svg"],"static/can.svg"],"./static/batteri.svg":[["batteri.8f952c53.svg","static/batteri.svg"],"static/batteri.svg"],"./static/sixpackplast.svg":[["sixpackplast.89828289.svg","static/sixpackplast.svg"],"static/sixpackplast.svg"],"_css_loader":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -392,5 +407,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/main.af46ece4.js.map
+},{}]},{},["../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","animations.js"], null)
+//# sourceMappingURL=/animations.eddd56ee.js.map

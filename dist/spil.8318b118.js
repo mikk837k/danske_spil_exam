@@ -184,12 +184,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"main.css":[function(require,module,exports) {
+},{"./bundle-url":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"spil.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./img/fish_spritesheet.png":[["fish_spritesheet.a4579460.png","img/fish_spritesheet.png"],"img/fish_spritesheet.png"],"./static/skraldepose.svg":[["skraldepose.a1a86a3e.svg","static/skraldepose.svg"],"static/skraldepose.svg"],"./static/start.svg":[["start.e702f8ab.svg","static/start.svg"],"static/start.svg"],"./img/seeweed_spritesheet.png":[["seeweed_spritesheet.b385ca3e.png","img/seeweed_spritesheet.png"],"img/seeweed_spritesheet.png"],"./static/havbund.svg":[["havbund.2e344e01.svg","static/havbund.svg"],"static/havbund.svg"],"./static/chokoladeplast.svg":[["chokoladeplast.321bd38a.svg","static/chokoladeplast.svg"],"static/chokoladeplast.svg"],"./static/can.svg":[["can.e4de338e.svg","static/can.svg"],"static/can.svg"],"./static/batteri.svg":[["batteri.8f952c53.svg","static/batteri.svg"],"static/batteri.svg"],"./static/sixpackplast.svg":[["sixpackplast.89828289.svg","static/sixpackplast.svg"],"static/sixpackplast.svg"],"_css_loader":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./static/fish_spritesheet.png":[["fish_spritesheet.fecff000.png","static/fish_spritesheet.png"],"static/fish_spritesheet.png"],"./static/seeweed_spritesheet.png":[["seeweed_spritesheet.9403326a.png","static/seeweed_spritesheet.png"],"static/seeweed_spritesheet.png"],"_css_loader":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -393,4 +393,4 @@ function hmrAcceptRun(bundle, id) {
   }
 }
 },{}]},{},["../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/main.af46ece4.js.map
+//# sourceMappingURL=/spil.8318b118.js.map

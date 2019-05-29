@@ -680,6 +680,7 @@ body {
 .spil,
 .form {
   display: none;
+  z-index: 10;
 }
 @media only screen and (min-width: 950px) {
   .container {
@@ -692,7 +693,7 @@ body {
     display: block;
     width: 375px;
     height: 667px;
-    background-color: var(--color_lightest_blue);
+    /* background-color: var(--color_lightest_blue); */
   }
 }
 

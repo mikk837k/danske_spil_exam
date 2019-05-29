@@ -117,79 +117,42 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
+})({"loadSVG.js":[function(require,module,exports) {
+"use strict";
 
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
+window.addEventListener("DOMContentLoaded", init);
 
-  return bundleURL;
+function init() {
+  loadSVG();
 }
 
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
+function loadSVG() {
+  console.log("load the svg");
+  fetch("static/forgrund.svg").then(function (response) {
+    return response.text();
+  }).then(function (mySVG) {
+    document.querySelector("#forgrund").insertAdjacentHTML("afterbegin", mySVG);
+  });
+  fetch("static/baggrund.svg").then(function (response) {
+    return response.text();
+  }).then(function (mySVG) {
+    document.querySelector("#baggrund").insertAdjacentHTML("afterbegin", mySVG);
+  });
+  fetch("static/school_of_fish.svg").then(function (response) {
+    return response.text();
+  }).then(function (mySVG) {
+    document.querySelector("#school_of_fish").insertAdjacentHTML("afterbegin", mySVG);
+  });
+  fetch("static/hearth.svg").then(function (response) {
+    return response.text();
+  }).then(function (mySVG) {
+    var heartElement = document.querySelectorAll(".heart");
+    heartElement.forEach(function (element) {
+      element.insertAdjacentHTML("afterbegin", mySVG);
+    });
+  });
 }
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"main.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./img/fish_spritesheet.png":[["fish_spritesheet.a4579460.png","img/fish_spritesheet.png"],"img/fish_spritesheet.png"],"./static/skraldepose.svg":[["skraldepose.a1a86a3e.svg","static/skraldepose.svg"],"static/skraldepose.svg"],"./static/start.svg":[["start.e702f8ab.svg","static/start.svg"],"static/start.svg"],"./img/seeweed_spritesheet.png":[["seeweed_spritesheet.b385ca3e.png","img/seeweed_spritesheet.png"],"img/seeweed_spritesheet.png"],"./static/havbund.svg":[["havbund.2e344e01.svg","static/havbund.svg"],"static/havbund.svg"],"./static/chokoladeplast.svg":[["chokoladeplast.321bd38a.svg","static/chokoladeplast.svg"],"static/chokoladeplast.svg"],"./static/can.svg":[["can.e4de338e.svg","static/can.svg"],"static/can.svg"],"./static/batteri.svg":[["batteri.8f952c53.svg","static/batteri.svg"],"static/batteri.svg"],"./static/sixpackplast.svg":[["sixpackplast.89828289.svg","static/sixpackplast.svg"],"static/sixpackplast.svg"],"_css_loader":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -392,5 +355,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/main.af46ece4.js.map
+},{}]},{},["../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","loadSVG.js"], null)
+//# sourceMappingURL=/loadSVG.22c49445.js.map

@@ -117,79 +117,180 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
+})({"index_test.js":[function(require,module,exports) {
+"use strict";
 
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
+window.addEventListener("DOMContentLoaded", init);
+var action = "";
+var myJSON;
+var playerHealth = 3;
+var collectedTrash = 0;
+var isGameOver = false;
+var gameContainer = document.querySelector("#game_container");
+
+function init() {
+  console.log("init kørt");
+  document.querySelector("#game_container").addEventListener("mousedown", windowClicked);
+  getJSON();
+}
+
+function getJSON() {
+  fetch("garbage.json").then(function (jsonData) {
+    return jsonData.json();
+  }).then(function (jsonData) {
+    myJSON = jsonData;
+    createElements();
+  });
+}
+
+function createElements() {
+  myJSON.forEach(function (element) {
+    var newDiv = document.createElement("div");
+    newDiv.classList.add("element");
+    newDiv.dataset.status = "trash";
+    newDiv.dataset.action = "remove";
+    newDiv.style.backgroundImage = "url(\"../img/".concat(element, ".svg\")"); // newDiv.style.backgroundColor = "red";
+
+    gameContainer.appendChild(newDiv);
+  });
+  placeElements();
+}
+
+function windowClicked(e) {
+  console.log("windowclicked kørt");
+  action = e.target.dataset.action;
+
+  if (action === "remove") {
+    console.log("if statement kørt");
+    removeElement(e);
+    incrementCounter();
   }
 
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
+  if (action === "start") {
+    startGame();
   }
 
-  return '/';
+  console.log(action);
 }
 
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+function placeElements() {
+  var elementArray = document.querySelectorAll("[data-status=trash]");
+  console.log(gameContainer.clientWidth); // place elements randomly on X axis using transform translate
+
+  for (var counter = 0; counter < elementArray.length; counter++) {
+    var stringifyNumb = getCoordinateWithinBox(gameContainer, elementArray[counter]).toString();
+    elementArray[counter].style.transform = "translate(".concat(stringifyNumb, "px, -200px)");
+  }
 }
 
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
+function getCoordinateWithinBox(container, elem) {
+  return Math.floor(Math.random() * (container.clientWidth - elem.clientWidth));
+}
 
-function updateLink(link) {
-  var newLink = link.cloneNode();
+function startGame() {
+  console.log("startGame kørt"); // Can this be done by using forEach? note the delay!
 
-  newLink.onload = function () {
-    link.remove();
+  playerHealthStatus();
+  checkValidity();
+}
+
+function checkValidity() {
+  var elementArray = document.querySelectorAll("[data-status=trash]");
+
+  var _loop = function _loop(counter) {
+    setTimeout(function () {
+      checkHealth(elementArray[counter], counter);
+    }, 1000 * counter);
   };
 
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
+  for (var counter = 0; counter < elementArray.length; counter++) {
+    _loop(counter);
+  }
 }
 
-var cssTimeout = null;
+function checkHealth(element, counter) {
+  // console.log(playerHealth);
+  if (!isGameOver && playerHealth === 0) {
+    isGameOver = true;
+    gameOver();
+  } else {
+    addAnimation(element, counter);
+  }
+}
 
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
+function addAnimation(element, counter) {
+  // console.log(element);
+  var Xpos = element.getBoundingClientRect().x;
+
+  if (counter <= 5) {
+    // element.classList.add("floatDown");
+    element.style.transform = "translate(".concat(Xpos, "px, 580px)");
+    element.classList.add("float_speed_1");
   }
 
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
+  if (counter > 5 && counter <= 10) {
+    element.style.transform = "translate(".concat(Xpos, "px, 580px)");
+    element.classList.add("float_speed_2");
+  }
 
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
+  if (counter >= 11 && counter <= 15) {
+    element.style.transform = "translate(".concat(Xpos, "px, 580px)");
+    element.classList.add("float_speed_3");
+  }
 
-    cssTimeout = null;
-  }, 50);
+  if (counter >= 16 && counter <= 31) {
+    element.style.transform = "translate(".concat(Xpos, "px, 580px)");
+    element.classList.add("float_speed_4");
+  }
 }
 
-module.exports = reloadCSS;
-},{"./bundle-url":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"main.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
+function playerHealthStatus() {
+  console.log("playerHealthStatus");
+  var elementArray = document.querySelectorAll("[data-status=trash]");
+  elementArray.forEach(function (element) {
+    element.addEventListener("transitionend", function () {
+      element.style.pointerEvents = "none";
 
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./img/fish_spritesheet.png":[["fish_spritesheet.a4579460.png","img/fish_spritesheet.png"],"img/fish_spritesheet.png"],"./static/skraldepose.svg":[["skraldepose.a1a86a3e.svg","static/skraldepose.svg"],"static/skraldepose.svg"],"./static/start.svg":[["start.e702f8ab.svg","static/start.svg"],"static/start.svg"],"./img/seeweed_spritesheet.png":[["seeweed_spritesheet.b385ca3e.png","img/seeweed_spritesheet.png"],"img/seeweed_spritesheet.png"],"./static/havbund.svg":[["havbund.2e344e01.svg","static/havbund.svg"],"static/havbund.svg"],"./static/chokoladeplast.svg":[["chokoladeplast.321bd38a.svg","static/chokoladeplast.svg"],"static/chokoladeplast.svg"],"./static/can.svg":[["can.e4de338e.svg","static/can.svg"],"static/can.svg"],"./static/batteri.svg":[["batteri.8f952c53.svg","static/batteri.svg"],"static/batteri.svg"],"./static/sixpackplast.svg":[["sixpackplast.89828289.svg","static/sixpackplast.svg"],"static/sixpackplast.svg"],"_css_loader":"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+      if (element.dataset.status === "trash") {
+        playerHealth--;
+        decreaseHealth();
+        console.log(playerHealth);
+      }
+    });
+  });
+}
+
+function decreaseHealth() {
+  var healthBar = document.querySelector("[data-status=no-damage]");
+}
+
+function gameOver() {
+  //
+  var elementArray = document.querySelectorAll("[data-status=trash]");
+  elementArray.forEach(function (element) {
+    element.dataset.status = "clean";
+  });
+  console.log("gameover");
+}
+
+function removeElement(e) {
+  // console.log(e);
+  // console.log("removeElement kørt");
+  // add if statement that defines that if the element is too far down on the page then it can't be clicked
+  e.target.dataset.status = "clean";
+  e.target.style.backgroundColor = "initial";
+  e.target.style.backgroundImage = 'url("../img/bubbles.png")'; // reset placement to be the original one
+
+  var posX = e.target.getBoundingClientRect().x;
+  e.target.style.transform = "translate(".concat(posX, "px, -200px)");
+}
+
+function incrementCounter() {
+  collectedTrash++;
+  document.querySelector("#score h1").textContent = collectedTrash; // Add counter to field in HTML to show amount of pieces collected
+  // console.log(collectedTrash);
+}
+},{}],"../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -392,5 +493,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
-//# sourceMappingURL=/main.af46ece4.js.map
+},{}]},{},["../../../../.npm-global/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index_test.js"], null)
+//# sourceMappingURL=/index_test.f328d342.js.map
