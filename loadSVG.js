@@ -30,12 +30,12 @@ function loadSVG() {
         .querySelector("#school_of_fish")
         .insertAdjacentHTML("afterbegin", mySVG);
     });
-  // fetch("heart.svg")
-  //   .then(response => response.text())
-  //   .then(mySVG => {
-  //     const heartElement = document.querySelectorAll(".heart");
-  //     heartElement.forEach(element => {
-  //       element.insertAdjacentHTML("afterbegin", mySVG);
-  //     });
-  //   });
+  fetch("heart.svg")
+    .then(response => response.text())
+    .then(mySVG => {
+      const heartElement = document.querySelectorAll(".heart");
+      heartElement.forEach(element => {
+        element.insertAdjacentHTML("afterbegin", mySVG);
+      });
+    });
 }

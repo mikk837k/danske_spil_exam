@@ -681,7 +681,7 @@ body {
 .form {
   display: none;
   z-index: 10;
-  box-shadow: black;
+  /* box-shadow: black; */
 }
 @media only screen and (min-width: 950px) {
   .container {
@@ -696,9 +696,15 @@ body {
     grid-column: 3 / span 1;
     grid-row: 1 / span 7;
     border: 1px solid black;
-    /* width: 375px;
-    height: 667px; */
-    /* background-color: var(--color_lightest_blue); */
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #game_container {
+    display: initial;
+    grid-column: 4 / span 1;
+    grid-row: 1 / span 7;
+    border: 1px solid black;
   }
 }
 
