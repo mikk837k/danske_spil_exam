@@ -62,9 +62,9 @@ button {
   bottom: 50px;
   left: 250px;
   position: absolute;
-  width: 20vw;
-  height: 20vw;
-  background-image: url(/fish_spritesheet.fecff000.png);
+  width: 150px;
+  height: 150px;
+  background-image: url(fish_spritesheet.fecff000.png);
   background-size: 400% 200%;
   animation-name: swim;
   animation-duration: 1.5s;
@@ -90,7 +90,7 @@ button {
   bottom: 45px;
   width: 20vw;
   height: 17vw;
-  background-image: url(/seeweed_spritesheet.9403326a.png);
+  background-image: url(seeweed_spritesheet.9403326a.png);
   background-size: 700% 100%;
   animation-name: float;
   animation-duration: 3s;

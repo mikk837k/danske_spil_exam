@@ -62,8 +62,8 @@ button {
   bottom: 50px;
   left: 250px;
   position: absolute;
-  width: 20vw;
-  height: 20vw;
+  width: 150px;
+  height: 150px;
   background-image: url(static/fish_spritesheet.png);
   background-size: 400% 200%;
   animation-name: swim;
