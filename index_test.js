@@ -39,7 +39,6 @@ function createElements() {
     newDiv.dataset.status = "trash";
     newDiv.dataset.action = "remove";
     newDiv.style.backgroundImage = `url("${element}.svg")`;
-    // newDiv.style.backgroundColor = "red";
     gameContainer.appendChild(newDiv);
   });
   placeElements();
