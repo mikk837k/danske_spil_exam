@@ -955,6 +955,10 @@ body {
 .form {
   display: none;
 }
+
+.spil_forside {
+  display: none;
+}
 @media only screen and (min-width: 1010px) {
   .container {
     display: contents;

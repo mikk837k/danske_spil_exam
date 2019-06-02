@@ -13,7 +13,8 @@ function init() {
   console.log("init");
 
   checkElement();
-  window.addEventListener("scroll", checkElement);
+
+  window.addEventListener("scroll", checkElement, true);
 }
 
 function checkElement() {
@@ -24,12 +25,12 @@ function checkElement() {
     let countUp = new CountUp(count_container, 3375);
     countUp.start();
     hasItRun = "yes";
+    window.removeEventListener("scroll", checkElement, true);
   }
 }
 
 const isInViewport = function(myElement) {
   const elementBounding = myElement.getBoundingClientRect();
-  console.log(elementBounding);
   return (
     elementBounding.top >= 0 &&
     elementBounding.left >= 0 &&
