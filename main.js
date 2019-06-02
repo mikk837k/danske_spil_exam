@@ -2,15 +2,43 @@
 
 import { CountUp } from "CountUp.js";
 
+window.addEventListener("load", init);
+
+const myElement = document.querySelector(".donation_text2");
+let hasItRun = "no";
 const count_container = document.querySelector(".big");
-
-window.addEventListener("load", () => {
-  console.log("test");
-  let countUp = new CountUp(count_container, 3375);
-  countUp.start();
-});
-
 const form = document.querySelector("form");
+
+function init() {
+  console.log("init");
+
+  checkElement();
+  window.addEventListener("scroll", checkElement);
+}
+
+function checkElement() {
+  console.log("checkElement");
+
+  if (isInViewport(myElement) && hasItRun === "no") {
+    console.log("it is in viewport");
+    let countUp = new CountUp(count_container, 3375);
+    countUp.start();
+    hasItRun = "yes";
+  }
+}
+
+const isInViewport = function(myElement) {
+  const elementBounding = myElement.getBoundingClientRect();
+  console.log(elementBounding);
+  return (
+    elementBounding.top >= 0 &&
+    elementBounding.left >= 0 &&
+    elementBounding.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
+    elementBounding.right <=
+      (window.innerWidth || document.documentElement.clientWidth)
+  );
+};
 
 form.addEventListener("submit", e => {
   console.log("submitted");
@@ -35,25 +63,8 @@ function post(newSubmit) {
     },
     body: postData
   })
-    /* ved direkte at kalde displayfriend af det nye objekt, der er tilføjet, opdateres arrayet bare
-  - altså indlæser den ikke hele arrayet igen. Derfor bliver det overflødigt at "nulstille" destinationen
-  og kalde get igen */
     .then(res => res.json())
     .then(data => {
-      // form.elements.submit.disabled = false;
-
-      // document
-      //   .querySelector(".message")
-      //   .classList.add("message_animation");
-
       form.reset();
-
-      // document
-      //   .querySelector(".message")
-      //   .addEventListener("animationend", () => {
-      //     document
-      //       .querySelector(".message")
-      //       .classList.remove("message_animation");
-      //   });
     });
 }
