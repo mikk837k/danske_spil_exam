@@ -309,7 +309,7 @@ body {
 }
 
 .flaske {
-  background-image: url(waterbottle.svg);
+  background-image: url(static/waterbottle.svg);
   background-size: 100%;
   background-repeat: no-repeat;
   width: 17vw;
@@ -815,17 +815,17 @@ body {
     grid-row: 6 / span 1;
     width: 70px;
     height: 105px;
-    margin-left: 37vw;
-    margin-top: 118px;
+    margin-left: 38vw;
+    margin-top: 128px;
     opacity: 0.9;
     grid-column: 3 / span 1;
-    transform: rotate(15deg);
+    transform: rotate(10deg);
   }
 }
 
 @media only screen and (min-width: 1200px) {
   .chokolade {
-    margin-left: 499.5px;
+    margin-left: 510px;
   }
 }
 @media only screen and (min-width: 1200px) {
