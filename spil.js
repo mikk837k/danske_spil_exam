@@ -7,9 +7,7 @@ import myJsonImport from "/static/garbage.json";
 // console.log(myJsonImport);
 
 let action = "";
-let myJSON;
 let playerHealth = 3;
-let hueRotation = 0;
 let collectedTrash = 0;
 let isGameOver = false;
 const gameContainer = document.querySelector("#game_container");
@@ -68,6 +66,10 @@ function windowClicked(e) {
 
   if (action === "luk_spil") {
     lukMobilFormat();
+  }
+
+  if (action === "genstart") {
+    restartGame();
   }
 
   console.log(action);
@@ -134,10 +136,10 @@ function startGame() {
 
   // Can this be done by using forEach? note the delay!
   playerHealthStatus();
-  checkValidity();
+  findTrashElements();
 }
 
-function checkValidity() {
+function findTrashElements() {
   const elementArray = document.querySelectorAll("[data-status=trash]");
   for (let counter = 0; counter < elementArray.length; counter++) {
     setTimeout(() => {
@@ -185,18 +187,21 @@ function playerHealthStatus() {
   elementArray.forEach(element => {
     element.addEventListener("transitionend", () => {
       element.style.pointerEvents = "none";
-      if (!isGameOver && playerHealth > 0) {
+      if (element.dataset.status === "trash") {
         playerHealth--;
+        decreaseHealth();
         console.log(playerHealth);
-      }
-      // decreaseHealth();
-
-      if (!isGameOver && playerHealth === 0) {
-        isGameOver = true;
-        gameOver();
       }
     });
   });
+}
+
+function decreaseHealth() {
+  const heart = document.querySelectorAll(
+    "[data-health=no-damage] svg .heart_cls-1"
+  );
+
+  heart[playerHealth].style.opacity = "0.2";
 }
 
 function gameOver() {
@@ -214,49 +219,63 @@ function gameOver() {
   document.querySelector(".genstart").style.pointerEvents = "all";
 }
 
+function restartGame() {
+  console.log("restergame kørt");
+  const trashArray = document.querySelectorAll(".element");
+  const scoreStatus = document.querySelector("#score h1");
+  const heart = document.querySelectorAll(
+    "[data-health=no-damage] svg .heart_cls-1"
+  );
+
+  heart.forEach(heart => {
+    heart.style.opacity = "1";
+  });
+
+  trashArray.forEach(element => {
+    element.parentNode.removeChild(element);
+  });
+  scoreStatus.textContent = "";
+  scoreStatus.textContent = "0/31";
+
+  document.querySelector(".gameover").style.opacity = "0";
+  document.querySelector(".gameover").style.pointerEvents = "none";
+
+  document.querySelector(".genstart").style.opacity = "0";
+  document.querySelector(".genstart").style.pointerEvents = "none";
+
+  document.querySelector(".spil_forside").style.opacity = "1";
+  document.querySelector(".spil_forside").style.pointerEvents = "all";
+
+  document.querySelector(".start").style.opacity = "1";
+  document.querySelector(".start").style.pointerEvents = "all";
+
+  playerHealth = 3;
+  collectedTrash = 0;
+
+  console.log(playerHealth, collectedTrash);
+
+  setTimeout(createElements, 300);
+}
+
 function removeElement(e) {
   // console.log(e);
   // console.log("removeElement kørt");
   // add if statement that defines that if the element is too far down on the page then it can't be clicked
   e.target.dataset.status = "clean";
-  e.target.style.backgroundColor = "initial";
-  e.target.style.backgroundImage = 'url("static/bubbles.png")';
+  e.target.style.backgroundImage = 'url("bubbles.png")';
   // reset placement to be the original one
-  let posX = e.target.getBoundingClientRect().x;
-  e.target.style.transform = `translate(${posX}px, -200px)`;
+  let elemXpos = e.target.getBoundingClientRect().x;
+  let gameContainerXpos = gameContainer.getBoundingClientRect().x;
+  console.log(elemXpos);
+  e.target.style.transform = `translate(${elemXpos -
+    gameContainerXpos}px, -200px)`;
 }
 
 function incrementCounter() {
   collectedTrash++;
-  document.querySelector("#score h1").textContent = collectedTrash;
+  const scoreStatus = document.querySelector("#score h1");
+  scoreStatus.textContent = "";
+  scoreStatus.textContent = collectedTrash + "/31";
   // Add counter to field in HTML to show amount of pieces collected
   // console.log(collectedTrash);
 }
-
-// function changeSVGbgColor() {
-//   //When the trash hits the bottom change background colors
-
-//   let childNodesArray = document.querySelector(
-//     "#game_container #baggrund svg g"
-//   ).children;
-//   console.log(document.querySelector("#game_container #baggrund svg g"));
-
-//   console.log(childNodesArray);
-//   hueRotation = hueRotation + 30;
-
-//   for (let counter = 0; counter <= childNodesArray.length; counter++) {
-//     console.log(hueRotation);
-
-//     childNodesArray[counter].style.filter = `hue-rotate(${hueRotation})`;
-//   }
-// }
-
-const deactivateElement = function(myElement) {
-  myElement.style.opacity = "0";
-  myElement.style.pointerEvents = "none";
-};
-
-const activateElement = function(myElement) {
-  myElement.style.opacity = "1";
-  myElement.style.pointerEvents = "all";
-};
