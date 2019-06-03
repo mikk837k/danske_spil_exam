@@ -21,8 +21,8 @@
   <body>
     <section class="section1">
       <div class="container">
-        <div id="game_container">
-          <button data-action="start">START</button>
+        <div class="lukknap" data-action="luk_spil">X</div>
+        <div class="container_content" id="game_container">
           <div id="score"><h1></h1></div>
           <div id="baggrund"></div>
           <div id="school_of_fish"></div>
@@ -36,8 +36,11 @@
             <div class="heart" data-health="no-damage"></div>
           </div>
         </div>
-        <div class="spil_forside"></div>
-        <form class="form">
+        <!-- <div class="box container_content"></div> -->
+        <div class="spil_forside container_content"></div>
+        <div class="regler container_content"></div>
+        <div class="gameover container_content"></div>
+        <form class="form container_content">
           <label for="navn">Navn</label>
           <input type="text" name="navn" id="navn" required />
           <label for="email">Email</label>
@@ -45,14 +48,15 @@
           <button type="submit">Sign up</button>
         </form>
       </div>
+
       <div class="logo">
         <img src="static/spillehjoernet_logo.png" alt="Spillehjørnets logo" />
       </div>
       <div class="logo_text">Udbydes af Danske Licens Spil A/S</div>
-      <p class="text1">
+      <h1 class="text1">
         Red miljøet sammen<br />
         med Danske Spil
-      </p>
+      </h1>
       <div class="fisk"></div>
       <div class="tang tang1"></div>
       <div class="tang tang2"></div>
@@ -61,10 +65,13 @@
       <div class="koral koral1"></div>
       <div class="koral koral2"></div>
       <div class="koral koral3"></div>
+      <div class="koral koral4"></div>
 
       <div class="pose"></div>
       <div class="flaske"></div>
-      <div class="start"></div>
+      <div class="knap start" data-action="start"></div>
+      <div class="knap mobil_start" data-action="mobil_start"></div>
+      <div class="knap genstart" data-action="genstart"></div>
       <div class="havbund"></div>
       <div class="purple_box">
         <p class="text2">
@@ -102,7 +109,7 @@
     </section>
 
     <script src="main.js"></script>
-    <script src="index_test.js"></script>
+    <script src="spil.js"></script>
     <script src="animations.js"></script>
     <script src="loadSVG.js"></script>
   </body>

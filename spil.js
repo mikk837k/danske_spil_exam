@@ -2,7 +2,7 @@
 
 window.addEventListener("DOMContentLoaded", init);
 
-// import myJsonImport from "/static/garbage.json";
+import myJsonImport from "/static/garbage.json";
 
 // console.log(myJsonImport);
 
@@ -12,20 +12,17 @@ let playerHealth = 3;
 let hueRotation = 0;
 let collectedTrash = 0;
 let isGameOver = false;
-// const gameContainer = document.querySelector("#game_container");
+const gameContainer = document.querySelector("#game_container");
 
 function init() {
   console.log("init kørt");
   // console.log(myJsonImport);
-  document
-    .querySelector("#game_container")
-    .addEventListener("mousedown", windowClicked);
+  document.querySelector("body").addEventListener("mousedown", windowClicked);
 
   // HUSK AT SLETTE NEDENSTÅENDE
-
-  document.querySelector(".spil_forside").style.display = "none";
   // getJSON();
   // createElements();
+  createElements();
 }
 
 // function getJSON() {
@@ -59,8 +56,18 @@ function windowClicked(e) {
     incrementCounter();
   }
   if (action === "start") {
-    startGame();
-    changeSVGbgColor();
+    showRules();
+    // startGame();
+    // changeSVGbgColor();
+  }
+
+  if (action === "mobil_start") {
+    mobilFormat();
+    showRules();
+  }
+
+  if (action === "luk_spil") {
+    lukMobilFormat();
   }
 
   console.log(action);
@@ -88,8 +95,43 @@ function getCoordinateWithinBox(container, elem) {
   return Math.floor(Math.random() * (container.clientWidth - elem.clientWidth));
 }
 
+const container = document.querySelector(".container");
+const startknap_mobil = document.querySelector(".mobil_start");
+const genstart_knap = document.querySelector(".genstart");
+
+function mobilFormat() {
+  console.log("mobilFormat");
+  container.style.height = "auto";
+
+  activateElement(container);
+
+  document.querySelector("body").style.overflow = "hidden";
+  deactivateElement(startknap_mobil);
+}
+function lukMobilFormat() {
+  console.log("lukMobilFormat");
+
+  deactivateElement(container);
+  document.querySelector("body").style.overflow = "initial";
+  activateElement(startknap_mobil);
+  deactivateElement(genstart_knap);
+}
+function showRules() {
+  console.log("showRules");
+  document.querySelector(".spil_forside").style.opacity = "0";
+  document.querySelector(".spil_forside").style.pointerEvents = "none";
+
+  document.querySelector(".start").style.opacity = "0";
+  document.querySelector(".start").style.pointerEvents = "none";
+
+  setTimeout(startGame, 4000);
+}
+
 function startGame() {
   console.log("startGame kørt");
+  document.querySelector(".regler").style.opacity = "0";
+  document.querySelector(".regler").style.pointerEvents = "none";
+
   // Can this be done by using forEach? note the delay!
   playerHealthStatus();
   checkValidity();
@@ -143,10 +185,15 @@ function playerHealthStatus() {
   elementArray.forEach(element => {
     element.addEventListener("transitionend", () => {
       element.style.pointerEvents = "none";
-      if (element.dataset.status === "trash") {
+      if (!isGameOver && playerHealth > 0) {
         playerHealth--;
-        decreaseHealth();
         console.log(playerHealth);
+      }
+      // decreaseHealth();
+
+      if (!isGameOver && playerHealth === 0) {
+        isGameOver = true;
+        gameOver();
       }
     });
   });
@@ -159,6 +206,12 @@ function gameOver() {
     element.dataset.status = "clean";
   });
   console.log("gameover");
+
+  document.querySelector(".gameover").style.opacity = "1";
+  document.querySelector(".gameover").style.pointerEvents = "all";
+
+  document.querySelector(".genstart").style.opacity = "1";
+  document.querySelector(".genstart").style.pointerEvents = "all";
 }
 
 function removeElement(e) {
@@ -197,3 +250,13 @@ function incrementCounter() {
 //     childNodesArray[counter].style.filter = `hue-rotate(${hueRotation})`;
 //   }
 // }
+
+const deactivateElement = function(myElement) {
+  myElement.style.opacity = "0";
+  myElement.style.pointerEvents = "none";
+};
+
+const activateElement = function(myElement) {
+  myElement.style.opacity = "1";
+  myElement.style.pointerEvents = "all";
+};
