@@ -2,23 +2,23 @@
   <defs>
     <style>
       .baggrund_cls-1 {
-        fill: #c4cacd;
+        fill: #ced6e1;
       }
 
       .baggrund_cls-2 {
-        fill: #a6afb4;
+        fill: #b5c1d2;
       }
 
       .baggrund_cls-3 {
-        fill: #88959b;
+        fill: #9dadc3;
       }
 
       .baggrund_cls-4 {
-        fill: #6a7a81;
+        fill: #8498b4;
       }
     </style>
   </defs>
-  <title>Artboard 2</title>
+  <title>baggrund</title>
   <g id="baggrund">
     <rect id="lag_5" class="baggrund_cls-1" width="375" height="667"/>
     <path id="lag_4" class="baggrund_cls-2" d="M302.85,71.61c-61.11,9.92-65.14,35.93-101,23.77-27-9.13-41.12-29.4-72.16-20.8-16.5,4.57-25.5,13.91-36.07,20.8C72.43,109.19,41.8,115.23,0,81.62V667H375V71.61A223.72,223.72,0,0,0,302.85,71.61Z"/>
