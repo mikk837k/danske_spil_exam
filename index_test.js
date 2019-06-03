@@ -2,25 +2,30 @@
 
 window.addEventListener("DOMContentLoaded", init);
 
-import myJsonImport from "/static/garbage.json";
+// import myJsonImport from "/static/garbage.json";
 
-console.log(myJsonImport);
+// console.log(myJsonImport);
 
 let action = "";
 let myJSON;
 let playerHealth = 3;
+let hueRotation = 0;
 let collectedTrash = 0;
 let isGameOver = false;
-const gameContainer = document.querySelector("#game_container");
+// const gameContainer = document.querySelector("#game_container");
 
 function init() {
   console.log("init kørt");
-  console.log(myJsonImport);
+  // console.log(myJsonImport);
   document
     .querySelector("#game_container")
     .addEventListener("mousedown", windowClicked);
+
+  // HUSK AT SLETTE NEDENSTÅENDE
+
+  document.querySelector(".spil_forside").style.display = "none";
   // getJSON();
-  createElements();
+  // createElements();
 }
 
 // function getJSON() {
@@ -55,6 +60,7 @@ function windowClicked(e) {
   }
   if (action === "start") {
     startGame();
+    changeSVGbgColor();
   }
 
   console.log(action);
@@ -146,10 +152,6 @@ function playerHealthStatus() {
   });
 }
 
-function decreaseHealth() {
-  const healthBar = document.querySelector("[data-status=no-damage]");
-}
-
 function gameOver() {
   //
   const elementArray = document.querySelectorAll("[data-status=trash]");
@@ -165,7 +167,7 @@ function removeElement(e) {
   // add if statement that defines that if the element is too far down on the page then it can't be clicked
   e.target.dataset.status = "clean";
   e.target.style.backgroundColor = "initial";
-  e.target.style.backgroundImage = 'url("../img/bubbles.png")';
+  e.target.style.backgroundImage = 'url("bubbles.png")';
   // reset placement to be the original one
   let posX = e.target.getBoundingClientRect().x;
   e.target.style.transform = `translate(${posX}px, -200px)`;
@@ -177,3 +179,21 @@ function incrementCounter() {
   // Add counter to field in HTML to show amount of pieces collected
   // console.log(collectedTrash);
 }
+
+// function changeSVGbgColor() {
+//   //When the trash hits the bottom change background colors
+
+//   let childNodesArray = document.querySelector(
+//     "#game_container #baggrund svg g"
+//   ).children;
+//   console.log(document.querySelector("#game_container #baggrund svg g"));
+
+//   console.log(childNodesArray);
+//   hueRotation = hueRotation + 30;
+
+//   for (let counter = 0; counter <= childNodesArray.length; counter++) {
+//     console.log(hueRotation);
+
+//     childNodesArray[counter].style.filter = `hue-rotate(${hueRotation})`;
+//   }
+// }

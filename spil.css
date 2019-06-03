@@ -17,6 +17,7 @@ body {
 }
 
 button {
+  left: 40%;
   position: absolute;
   z-index: 5;
 }
@@ -37,7 +38,7 @@ button {
 }
 
 #healthBar {
-  right: 0px;
+  right: 3px;
   top: 0px;
   width: 150px;
   height: 50px;
@@ -64,7 +65,7 @@ button {
   position: absolute;
   width: 150px;
   height: 150px;
-  background-image: url(static/fish_spritesheet.png);
+  background-image: url(static/fish_spritesheet_gul_ny.png);
   background-size: 400% 200%;
   animation-name: swim;
   animation-duration: 1.5s;
@@ -87,9 +88,9 @@ button {
 
 #seaweed {
   position: absolute;
-  bottom: 45px;
-  width: 20vw;
-  height: 17vw;
+  bottom: 46px;
+  width: 100px;
+  height: 83px;
   background-image: url(static/seeweed_spritesheet.png);
   background-size: 700% 100%;
   animation-name: float;

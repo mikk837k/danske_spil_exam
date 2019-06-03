@@ -14,18 +14,21 @@ function init() {
 function randomStartPos() {
   console.log("randomStartPos");
   let yPos = calculateYPos(gameContainer, schoolOfFish).toString();
-  let xPos = calculateEndPosRight(gameContainer, schoolOfFish).toString();
+  // let xPos = calculateEndPosRight(gameContainer, schoolOfFish).toString();
+  let xPos = gameContainer.clientWidth;
+
   schoolOfFish.style.transform = `translate(${xPos}px, ${yPos}px)`;
 
-  console.log(yPos, xPos);
+  // console.log(containerXpos, yPos, xPos);
 
-  chooseDirection(yPos);
+  chooseDirection(yPos, xPos);
 }
 
 function randomYPos(yPos, xPos) {
+  // console.log("randomYpos", xPos);
   let newYpos = calculateYPos(gameContainer, schoolOfFish).toString();
 
-  schoolOfFish.style.transform = `translate(${newYpos}px, ${yPos}px)`;
+  schoolOfFish.style.transform = `translate(${xPos}px, ${newYpos}px)`;
 
   chooseDirection(newYpos, xPos);
 }
@@ -54,8 +57,9 @@ function chooseDirection(yPos, xPos) {
 // Animate school of fish
 
 function animateLeft(yPos) {
-  let xPos = calculateEndPosLeft(containerXpos, schoolOfFish).toString();
-  //   console.log("animateLeft", xPos, yPos);
+  // let xPos = calculateEndPosLeft(gameContainer, schoolOfFish).toString();
+  let xPos = calculateEndPosLeft(schoolOfFish);
+  // console.log("animateLeft", xPos);
 
   schoolOfFish.style.transform = `translate(${xPos}px, ${yPos}px) scaleX(1)`;
   schoolOfFish.style.transitionDuration = "5s";
@@ -69,7 +73,8 @@ function animateLeft(yPos) {
 }
 
 function animateRight(yPos) {
-  let xPos = calculateEndPosRight(gameContainer, schoolOfFish).toString();
+  // let xPos = calculateEndPosRight(gameContainer, schoolOfFish).toString();
+  let xPos = gameContainer.clientWidth;
 
   //   console.log("animateRight", xPos, yPos);
   schoolOfFish.style.transitionDuration = "5s";
@@ -87,13 +92,13 @@ function animateRight(yPos) {
 
 function calculateYPos(container, elem) {
   return Math.floor(
-    Math.random() * (container.clientHeight - elem.clientWidth)
+    Math.random() * (container.clientHeight - elem.clientHeight)
   );
 }
-function calculateEndPosLeft(container, elem) {
-  return container - elem.clientWidth;
+function calculateEndPosLeft(elem) {
+  return 0 - elem.clientWidth;
 }
 
-function calculateEndPosRight(container, elem) {
-  return container.clientWidth + elem.clientWidth;
-}
+// function calculateEndPosRight(container, elem) {
+//   return container.clientWidth;
+// }
