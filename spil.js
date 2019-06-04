@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", init);
 
 import myJsonImport from "/static/garbage.json";
 
-// console.log(myJsonImport);
+// //////console.log(myJsonImport);
 
 let action = "";
 let playerHealth = 3;
@@ -13,8 +13,8 @@ let isGameOver = false;
 const gameContainer = document.querySelector("#game_container");
 
 function init() {
-  console.log("init kørt");
-  // console.log(myJsonImport);
+  //console.log("init kørt");
+  // //console.log(myJsonImport);
   document.querySelector("body").addEventListener("mousedown", windowClicked);
 
   // HUSK AT SLETTE NEDENSTÅENDE
@@ -45,11 +45,11 @@ function createElements() {
 }
 
 function windowClicked(e) {
-  console.log("windowclicked kørt");
+  //console.log("windowclicked kørt");
   action = e.target.dataset.action;
 
   if (action === "remove") {
-    console.log("if statement kørt");
+    //console.log("if statement kørt");
     removeElement(e);
     incrementCounter();
   }
@@ -72,13 +72,13 @@ function windowClicked(e) {
     restartGame();
   }
 
-  console.log(action);
+  //console.log(action);
 }
 
 function placeElements() {
   const elementArray = document.querySelectorAll("[data-status=trash]");
 
-  console.log(gameContainer.clientWidth);
+  //console.log(gameContainer.clientWidth);
 
   // place elements randomly on X axis using transform translate
   for (let counter = 0; counter < elementArray.length; counter++) {
@@ -102,7 +102,7 @@ const startknap_mobil = document.querySelector(".mobil_start");
 const genstart_knap = document.querySelector(".genstart");
 
 function mobilFormat() {
-  console.log("mobilFormat");
+  //console.log("mobilFormat");
   container.style.height = "auto";
 
   activateElement(container);
@@ -111,7 +111,7 @@ function mobilFormat() {
   deactivateElement(startknap_mobil);
 }
 function lukMobilFormat() {
-  console.log("lukMobilFormat");
+  //console.log("lukMobilFormat");
 
   deactivateElement(container);
   document.querySelector("body").style.overflow = "initial";
@@ -119,7 +119,7 @@ function lukMobilFormat() {
   deactivateElement(genstart_knap);
 }
 function showRules() {
-  console.log("showRules");
+  //console.log("showRules");
   document.querySelector(".spil_forside").style.opacity = "0";
   document.querySelector(".spil_forside").style.pointerEvents = "none";
 
@@ -130,7 +130,7 @@ function showRules() {
 }
 
 function startGame() {
-  console.log("startGame kørt");
+  //console.log("startGame kørt");
   document.querySelector(".regler").style.opacity = "0";
   document.querySelector(".regler").style.pointerEvents = "none";
 
@@ -148,8 +148,8 @@ function findTrashElements() {
   }
 }
 function checkHealth(element, counter) {
-  // console.log(playerHealth);
-  if (!isGameOver && playerHealth === 0) {
+  console.log(isGameOver, playerHealth);
+  if (!isGameOver && playerHealth === 1) {
     isGameOver = true;
     gameOver();
   } else {
@@ -158,7 +158,7 @@ function checkHealth(element, counter) {
 }
 
 function addAnimation(element, counter) {
-  // console.log(element);
+  // //console.log(element);
   let Xpos = element.getBoundingClientRect().x;
   let gameContainerXpos = gameContainer.getBoundingClientRect().x;
 
@@ -188,9 +188,10 @@ function playerHealthStatus() {
     element.addEventListener("transitionend", () => {
       element.style.pointerEvents = "none";
       if (element.dataset.status === "trash") {
+        console.log("te called");
         playerHealth--;
         decreaseHealth();
-        console.log(playerHealth);
+        //console.log(playerHealth);
       }
     });
   });
@@ -220,7 +221,7 @@ function gameOver() {
 }
 
 function restartGame() {
-  console.log("restergame kørt");
+  //console.log("restergame kørt");
   const trashArray = document.querySelectorAll(".element");
   const scoreStatus = document.querySelector("#score h1");
   const heart = document.querySelectorAll(
@@ -236,7 +237,7 @@ function restartGame() {
   });
   scoreStatus.textContent = "";
   scoreStatus.textContent = "0/31";
-
+  isGameOver = false;
   document.querySelector(".gameover").style.opacity = "0";
   document.querySelector(".gameover").style.pointerEvents = "none";
 
@@ -252,21 +253,21 @@ function restartGame() {
   playerHealth = 3;
   collectedTrash = 0;
 
-  console.log(playerHealth, collectedTrash);
+  //console.log(playerHealth, collectedTrash);
 
   setTimeout(createElements, 300);
 }
 
 function removeElement(e) {
-  // console.log(e);
-  // console.log("removeElement kørt");
+  // //console.log(e);
+  // //console.log("removeElement kørt");
   // add if statement that defines that if the element is too far down on the page then it can't be clicked
   e.target.dataset.status = "clean";
   e.target.style.backgroundImage = 'url("bubbles.png")';
   // reset placement to be the original one
   let elemXpos = e.target.getBoundingClientRect().x;
   let gameContainerXpos = gameContainer.getBoundingClientRect().x;
-  console.log(elemXpos);
+  //console.log(elemXpos);
   e.target.style.transform = `translate(${elemXpos -
     gameContainerXpos}px, -200px)`;
 }
@@ -277,5 +278,5 @@ function incrementCounter() {
   scoreStatus.textContent = "";
   scoreStatus.textContent = collectedTrash + "/31";
   // Add counter to field in HTML to show amount of pieces collected
-  // console.log(collectedTrash);
+  // //console.log(collectedTrash);
 }
