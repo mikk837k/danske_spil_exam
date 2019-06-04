@@ -10,6 +10,7 @@ let action = "";
 let playerHealth = 3;
 let collectedTrash = 0;
 let isGameOver = false;
+let isGameWon = false;
 let soundOn = false;
 const gameContainer = document.querySelector("#game_container");
 const container = document.querySelector(".container");
@@ -61,9 +62,14 @@ function windowClicked(e) {
     showRules();
   }
 
-  if (action === "mobil_start") {
+  if (!isGameWon && action === "mobil_start") {
     mobilFormat();
     showRules();
+  }
+
+  if (isGameWon && action === "mobil_start") {
+    mobilFormat();
+    showSignUp();
   }
 
   if (action === "luk_spil") {
@@ -127,6 +133,17 @@ function showRules() {
   document.querySelector(".start").style.pointerEvents = "none";
 
   setTimeout(startGame, 4000);
+}
+
+function showSignUp() {
+  document.querySelector("#game_container").style.opacity = "0";
+  document.querySelector("#game_container").style.pointerEvents = "none";
+  document.querySelector(".regler").style.opacity = "0";
+  document.querySelector(".regler").style.pointerEvents = "none";
+  document.querySelector(".spil_forside").style.opacity = "0";
+  document.querySelector(".spil_forside").style.pointerEvents = "none";
+  document.querySelector(".gameover").style.opacity = "0";
+  document.querySelector(".gameover").style.pointerEvents = "none";
 }
 
 function startGame() {
@@ -211,7 +228,7 @@ function gameWon() {
   document.querySelector("#game_container").style.transitionDuration = "1s";
   document.querySelector("#game_container").style.opacity = "0";
   document.querySelector("#game_container").style.pointerEvents = "none";
-
+  isGameWon = true;
   ambientSoundEffect();
 }
 
