@@ -267,20 +267,26 @@ function resetGame() {
   scoreStatus.textContent = "";
   scoreStatus.textContent = "0/31";
   isGameOver = false;
-  document.querySelector(".gameover").style.opacity = "0";
-  document.querySelector(".gameover").style.pointerEvents = "none";
 
-  document.querySelector(".genstart").style.opacity = "0";
-  document.querySelector(".genstart").style.pointerEvents = "none";
+  const gameoverLag = document.querySelector(".gameover");
+  // document.querySelector(".gameover").style.opacity = "0";
+  // document.querySelector(".gameover").style.pointerEvents = "none";
 
-  document.querySelector(".spil_forside").style.opacity = "1";
-  document.querySelector(".spil_forside").style.pointerEvents = "all";
+  deactivateElement(gameoverLag);
+  // document.querySelector(".genstart").style.opacity = "0";
+  // document.querySelector(".genstart").style.pointerEvents = "none";
 
-  document.querySelector(".start").style.opacity = "1";
-  document.querySelector(".start").style.pointerEvents = "all";
+  deactivateElement(genstart_knap);
 
-  document.querySelector(".regler").style.opacity = "1";
-  document.querySelector(".regler").style.pointerEvents = "all";
+  const startKnap = document.querySelector(".start");
+  // document.querySelector(".start").style.opacity = "1";
+  // document.querySelector(".start").style.pointerEvents = "all";
+  activateElement(startKnap);
+
+  const reglerLag = document.querySelector(".regler");
+  // document.querySelector(".regler").style.opacity = "1";
+  // document.querySelector(".regler").style.pointerEvents = "all";
+  activateElement(reglerLag);
 
   console.log(soundOn);
 

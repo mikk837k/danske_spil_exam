@@ -75,6 +75,7 @@ button {
   height: 80px;
   background-repeat: no-repeat;
   background-size: contain;
+  opacity: 0.8;
 }
 
 #main_character {

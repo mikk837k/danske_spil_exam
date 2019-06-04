@@ -1459,7 +1459,12 @@ input.submit {
   background-color: none;
   justify-self: center;
 }
-
+@media only screen and (min-width: 600px) {
+  input.submit {
+    width: 25vw;
+    height: 10vw;
+  }
+}
 @media only screen and (min-width: 1010px) {
   input.submit {
     width: 18vw;
