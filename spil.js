@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", init);
 
 import myJsonImport from "/static/garbage.json";
 
-// //////console.log(myJsonImport);
+// ////////console.log(myJsonImport);
 
 let action = "";
 let playerHealth = 3;
@@ -18,8 +18,8 @@ const startknap_mobil = document.querySelector(".mobil_start");
 const genstart_knap = document.querySelector(".genstart");
 
 function init() {
-  //console.log("init kørt");
-  // //console.log(myJsonImport);
+  ////console.log("init kørt");
+  // ////console.log(myJsonImport);
   document.querySelector("body").addEventListener("mousedown", windowClicked);
 
   // HUSK AT SLETTE NEDENSTÅENDE
@@ -50,11 +50,11 @@ function createElements() {
 }
 
 function windowClicked(e) {
-  //console.log("windowclicked kørt");
+  ////console.log("windowclicked kørt");
   action = e.target.dataset.action;
 
   if (action === "remove") {
-    //console.log("if statement kørt");
+    ////console.log("if statement kørt");
     removeElement(e);
     trashCollected();
   }
@@ -80,13 +80,13 @@ function windowClicked(e) {
     resetGame();
   }
 
-  //console.log(action);
+  ////console.log(action);
 }
 
 function placeElements() {
   const elementArray = document.querySelectorAll("[data-status=trash]");
 
-  //console.log(gameContainer.clientWidth);
+  ////console.log(gameContainer.clientWidth);
 
   // place elements randomly on X axis using transform translate
   for (let counter = 0; counter < elementArray.length; counter++) {
@@ -106,7 +106,7 @@ function getCoordinateWithinBox(container, elem) {
 }
 
 function mobilFormat() {
-  //console.log("mobilFormat");
+  ////console.log("mobilFormat");
   container.style.height = "auto";
 
   activateElement(container);
@@ -115,7 +115,7 @@ function mobilFormat() {
   deactivateElement(startknap_mobil);
 }
 function lukMobilFormat() {
-  //console.log("lukMobilFormat");
+  ////console.log("lukMobilFormat");
 
   deactivateElement(container);
   document.querySelector("body").style.overflow = "initial";
@@ -125,7 +125,7 @@ function lukMobilFormat() {
   resetGame();
 }
 function showRules() {
-  //console.log("showRules");
+  ////console.log("showRules");
   document.querySelector(".spil_forside").style.opacity = "0";
   document.querySelector(".spil_forside").style.pointerEvents = "none";
 
@@ -147,7 +147,7 @@ function showSignUp() {
 }
 
 function startGame() {
-  //console.log("startGame kørt");
+  ////console.log("startGame kørt");
   document.querySelector(".regler").style.opacity = "0";
   document.querySelector(".regler").style.pointerEvents = "none";
   // Can this be done by using forEach? note the delay!
@@ -166,7 +166,7 @@ function findTrashElements() {
   }
 }
 function checkHealth() {
-  console.log(isGameOver, playerHealth);
+  //console.log(isGameOver, playerHealth);
   if (!isGameOver && playerHealth === 0) {
     isGameOver = true;
     gameOver();
@@ -174,7 +174,7 @@ function checkHealth() {
 }
 
 function addAnimationToElement(element, counter) {
-  // //console.log(element);
+  // ////console.log(element);
   let Xpos = element.getBoundingClientRect().x;
   let gameContainerXpos = gameContainer.getBoundingClientRect().x;
 
@@ -198,7 +198,7 @@ function addAnimationToElement(element, counter) {
 }
 
 function playerHealthStatus() {
-  console.log("playerHealthStatus");
+  //console.log("playerHealthStatus");
   const elementArray = document.querySelectorAll("[data-status=trash]");
   elementArray.forEach(element => {
     element.addEventListener("transitionend", () => {
@@ -224,7 +224,7 @@ function decreaseHealth() {
 }
 
 function gameWon() {
-  console.log("gameWon kørt");
+  //console.log("gameWon kørt");
   document.querySelector("#game_container").style.transitionDuration = "1s";
   document.querySelector("#game_container").style.opacity = "0";
   document.querySelector("#game_container").style.pointerEvents = "none";
@@ -238,7 +238,7 @@ function gameOver() {
   elementArray.forEach(element => {
     element.dataset.status = "clean";
   });
-  console.log("gameover");
+  //console.log("gameover");
 
   ambientSoundEffect();
 
@@ -250,7 +250,7 @@ function gameOver() {
 }
 
 function resetGame() {
-  //console.log("restergame kørt");
+  ////console.log("restergame kørt");
   const trashArray = document.querySelectorAll(".element");
   const scoreStatus = document.querySelector("#score h1");
   const heart = document.querySelectorAll(
@@ -288,22 +288,22 @@ function resetGame() {
   // document.querySelector(".regler").style.pointerEvents = "all";
   activateElement(reglerLag);
 
-  console.log(soundOn);
+  //console.log(soundOn);
 
   playerHealth = 3;
   collectedTrash = 0;
   soundOn = false;
 
-  console.log(soundOn);
+  //console.log(soundOn);
 
-  //console.log(playerHealth, collectedTrash);
-
-  setTimeout(createElements, 300);
+  ////console.log(playerHealth, collectedTrash);
+  createElements();
+  setTimeout(showRules, 300);
 }
 
 function removeElement(e) {
-  // //console.log(e);
-  // //console.log("removeElement kørt");
+  // ////console.log(e);
+  // ////console.log("removeElement kørt");
   // add if statement that defines that if the element is too far down on the page then it can't be clicked
   e.target.dataset.status = "clean";
   e.target.style.backgroundImage = 'url("bubbles.png")';
@@ -311,7 +311,7 @@ function removeElement(e) {
   // reset placement to be the original one
   let elemXpos = e.target.getBoundingClientRect().x;
   let gameContainerXpos = gameContainer.getBoundingClientRect().x;
-  //console.log(elemXpos);
+  ////console.log(elemXpos);
   e.target.style.transform = `translate(${elemXpos -
     gameContainerXpos}px, -200px)`;
 
@@ -343,7 +343,7 @@ function ambientSoundEffect() {
 function gameStatus() {
   const trashArray = document.querySelectorAll("[data-status=trash]");
 
-  console.log(trashArray.length);
+  //console.log(trashArray.length);
 
   if (trashArray.length === 0 && !isGameOver) {
     gameWon();
@@ -351,7 +351,7 @@ function gameStatus() {
 }
 
 function trashCollected() {
-  console.log("trashCollected kørt");
+  //console.log("trashCollected kørt");
   collectedTrash++;
   const scoreStatus = document.querySelector("#score h1");
   scoreStatus.textContent = "";

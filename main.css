@@ -1072,6 +1072,7 @@ body {
   /* width: 375px;
   height: 667px; */
   background-color: var(--color_purple);
+  background-image: url(static/form_baggrund.svg);
   z-index: 2;
   display: grid;
   grid-template-rows: 20px 230px 110px 50px 10px 50px 60px auto 20px;

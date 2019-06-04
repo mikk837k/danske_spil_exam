@@ -3,8 +3,6 @@ body {
   padding: 0;
 }
 #game_container {
-  /* height: 46.319vw;
-  width: 26vw; */
   height: 667px;
   width: 375px;
   position: relative;
@@ -55,10 +53,11 @@ button {
 }
 
 #healthBar {
-  right: 3px;
+  right: 105px;
   top: 0px;
   width: 150px;
   height: 50px;
+  z-index: 5;
   position: absolute;
   display: flex;
   justify-content: space-between;
@@ -150,4 +149,10 @@ button {
 
 .flipImage {
   transition-duration: 500ms;
+}
+
+@media only screen and (min-width: 376px) {
+  #healthBar {
+    right: 5px;
+  }
 }

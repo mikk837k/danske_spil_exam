@@ -7,7 +7,7 @@ function init() {
 }
 
 function loadSVG() {
-  console.log("load the svg");
+  //console.log("load the svg");
 
   fetch("forgrund.svg")
     .then(response => response.text())

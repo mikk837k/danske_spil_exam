@@ -7,25 +7,25 @@ let elementIsToRight = true;
 let containerXpos = gameContainer.getBoundingClientRect().x;
 
 function init() {
-  console.log("init");
+  //console.log("init");
   randomStartPos();
 }
 
 function randomStartPos() {
-  console.log("randomStartPos");
+  //console.log("randomStartPos");
   let yPos = calculateYPos(gameContainer, schoolOfFish).toString();
   // let xPos = calculateEndPosRight(gameContainer, schoolOfFish).toString();
   let xPos = gameContainer.clientWidth;
 
   schoolOfFish.style.transform = `translate(${xPos}px, ${yPos}px)`;
 
-  // console.log(containerXpos, yPos, xPos);
+  // //console.log(containerXpos, yPos, xPos);
 
   chooseDirection(yPos, xPos);
 }
 
 function randomYPos(yPos, xPos) {
-  // console.log("randomYpos", xPos);
+  // //console.log("randomYpos", xPos);
   let newYpos = calculateYPos(gameContainer, schoolOfFish).toString();
 
   schoolOfFish.style.transform = `translate(${xPos}px, ${newYpos}px)`;
@@ -34,12 +34,12 @@ function randomYPos(yPos, xPos) {
 }
 
 function chooseDirection(yPos, xPos) {
-  //   console.log("generateNewYPos", yPos);
+  //   //console.log("generateNewYPos", yPos);
 
   schoolOfFish.style.transitionDuration = "0";
 
   if (elementIsToRight === true) {
-    // console.log(yPos);
+    // //console.log(yPos);
     schoolOfFish.style.transitionDuration = "200ms";
     schoolOfFish.style.transform = `translate(${xPos}px, ${yPos}px) scaleX(1)`;
     setTimeout(() => {
@@ -59,7 +59,7 @@ function chooseDirection(yPos, xPos) {
 function animateLeft(yPos) {
   // let xPos = calculateEndPosLeft(gameContainer, schoolOfFish).toString();
   let xPos = calculateEndPosLeft(schoolOfFish);
-  // console.log("animateLeft", xPos);
+  // //console.log("animateLeft", xPos);
 
   schoolOfFish.style.transform = `translate(${xPos}px, ${yPos}px) scaleX(1)`;
   schoolOfFish.style.transitionDuration = "5s";
@@ -76,7 +76,7 @@ function animateRight(yPos) {
   // let xPos = calculateEndPosRight(gameContainer, schoolOfFish).toString();
   let xPos = gameContainer.clientWidth;
 
-  //   console.log("animateRight", xPos, yPos);
+  //   //console.log("animateRight", xPos, yPos);
   schoolOfFish.style.transitionDuration = "5s";
   schoolOfFish.style.transitionTimingFunction = "linear";
   schoolOfFish.style.transform = `translate(${xPos}px, ${yPos}px) scaleX(-1)`;
