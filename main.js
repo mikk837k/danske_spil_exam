@@ -7,7 +7,6 @@ window.addEventListener("load", init);
 const myElement = document.querySelector(".donation_text2");
 let hasItRun = "no";
 const count_container = document.querySelector(".big");
-const form = document.querySelector("form");
 
 function init() {
   console.log("init");
@@ -40,32 +39,3 @@ const isInViewport = function(myElement) {
       (window.innerWidth || document.documentElement.clientWidth)
   );
 };
-
-form.addEventListener("submit", e => {
-  console.log("submitted");
-  e.preventDefault();
-  const payload = {
-    navn: form.elements.navn.value,
-    email: form.elements.email.value
-  };
-  post(payload);
-});
-
-function post(newSubmit) {
-  console.log("post");
-
-  const postData = JSON.stringify(newSubmit);
-  fetch("https://friends-a7f9.restdb.io/rest/danske-spil", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": "5c7ceca0cac6621685acbada",
-      "cache-control": "no-cache"
-    },
-    body: postData
-  })
-    .then(res => res.json())
-    .then(data => {
-      form.reset();
-    });
-}

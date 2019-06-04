@@ -39,16 +39,53 @@
             <div class="heart" data-health="no-damage"></div>
           </div>
         </div>
-        <!-- <div class="box container_content"></div> -->
         <div class="spil_forside container_content"></div>
         <div class="regler container_content"></div>
         <div class="gameover container_content"></div>
         <form class="form container_content">
-          <label for="navn">Navn</label>
-          <input type="text" name="navn" id="navn" required />
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" required />
-          <button type="submit">Sign up</button>
+          <h2 class="form_text1">
+            <span class="tak">TAK</span> <br />fordi du tænker på miljøet
+          </h2>
+          <p class="form_text2">
+            Udfyld navn og e-mail herunder, så donerer Danske Spil 25 kr. til
+            projektet <span class="italic">Plastfrit Hav</span>
+          </p>
+
+          <div class="float_container formfield1">
+            <label class="input_label" for="navn">Navn</label>
+            <input
+              class="float_text"
+              type="text"
+              name="navn"
+              id="navn"
+              data-placeholder="Simon Jensen"
+              required
+            />
+          </div>
+
+          <div class="float_container formfield2">
+            <label class="input_label" for="email">Email</label>
+            <input
+              class="float_text"
+              type="email"
+              name="email"
+              id="email"
+              data-placeholder="sj@sj.dk"
+              required
+            />
+          </div>
+
+          <label class="terms">
+            <input type="checkbox" id="terms" required />
+
+            Jeg accepterer Danske Spils vilkår og betingelser
+            <a
+              href="https://danskespil.dk/regler_og_vilkaar/vilkaar/vilkaar-dli"
+              >(læs her)</a
+            >
+          </label>
+
+          <div class="knap submit" type="submit" data-action="submit"></div>
         </form>
       </div>
 
@@ -123,6 +160,7 @@
       Your browser does not support the audio element.
     </audio> -->
     <script src="main.js"></script>
+    <script src="form.js"></script>
     <script src="spil.js"></script>
     <script src="animations.js"></script>
     <script src="loadSVG.js"></script>
