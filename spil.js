@@ -11,6 +11,9 @@ let playerHealth = 3;
 let collectedTrash = 0;
 let isGameOver = false;
 const gameContainer = document.querySelector("#game_container");
+const container = document.querySelector(".container");
+const startknap_mobil = document.querySelector(".mobil_start");
+const genstart_knap = document.querySelector(".genstart");
 
 function init() {
   //console.log("init kørt");
@@ -69,7 +72,7 @@ function windowClicked(e) {
   }
 
   if (action === "genstart") {
-    restartGame();
+    resetGame();
   }
 
   //console.log(action);
@@ -96,10 +99,6 @@ function placeElements() {
 function getCoordinateWithinBox(container, elem) {
   return Math.floor(Math.random() * (container.clientWidth - elem.clientWidth));
 }
-
-const container = document.querySelector(".container");
-const startknap_mobil = document.querySelector(".mobil_start");
-const genstart_knap = document.querySelector(".genstart");
 
 function mobilFormat() {
   //console.log("mobilFormat");
@@ -144,11 +143,11 @@ function findTrashElements() {
   for (let counter = 0; counter < elementArray.length; counter++) {
     setTimeout(() => {
       //checkHealth(elementArray[counter], counter);
-      addAnimation(elementArray[counter], counter);
+      addAnimationToElement(elementArray[counter], counter);
     }, 1000 * counter);
   }
 }
-function checkHealth(element, counter) {
+function checkHealth() {
   console.log(isGameOver, playerHealth);
   if (!isGameOver && playerHealth === 0) {
     isGameOver = true;
@@ -156,7 +155,7 @@ function checkHealth(element, counter) {
   }
 }
 
-function addAnimation(element, counter) {
+function addAnimationToElement(element, counter) {
   // //console.log(element);
   let Xpos = element.getBoundingClientRect().x;
   let gameContainerXpos = gameContainer.getBoundingClientRect().x;
@@ -220,7 +219,7 @@ function gameOver() {
   document.querySelector(".genstart").style.pointerEvents = "all";
 }
 
-function restartGame() {
+function resetGame() {
   //console.log("restergame kørt");
   const trashArray = document.querySelectorAll(".element");
   const scoreStatus = document.querySelector("#score h1");
@@ -270,6 +269,20 @@ function removeElement(e) {
   //console.log(elemXpos);
   e.target.style.transform = `translate(${elemXpos -
     gameContainerXpos}px, -200px)`;
+}
+
+function impactSoundEffect() {
+  var impact = document.getElementById("audio_2");
+  impact.play();
+}
+function bubbleSoundEffect() {
+  var bubbles = document.getElementById("audio_1");
+  bubbles.play();
+}
+
+function ambientSoundEffect() {
+  var ambience = document.getElementById("audio_1");
+  ambience.play();
 }
 
 function incrementCounter() {
