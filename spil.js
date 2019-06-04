@@ -143,17 +143,16 @@ function findTrashElements() {
   const elementArray = document.querySelectorAll("[data-status=trash]");
   for (let counter = 0; counter < elementArray.length; counter++) {
     setTimeout(() => {
-      checkHealth(elementArray[counter], counter);
+      //checkHealth(elementArray[counter], counter);
+      addAnimation(elementArray[counter], counter);
     }, 1000 * counter);
   }
 }
 function checkHealth(element, counter) {
   console.log(isGameOver, playerHealth);
-  if (!isGameOver && playerHealth === 1) {
+  if (!isGameOver && playerHealth === 0) {
     isGameOver = true;
     gameOver();
-  } else {
-    addAnimation(element, counter);
   }
 }
 
@@ -191,6 +190,7 @@ function playerHealthStatus() {
         console.log("te called");
         playerHealth--;
         decreaseHealth();
+        checkHealth();
         //console.log(playerHealth);
       }
     });
