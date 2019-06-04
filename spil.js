@@ -10,6 +10,7 @@ let action = "";
 let playerHealth = 3;
 let collectedTrash = 0;
 let isGameOver = false;
+let soundOn = false;
 const gameContainer = document.querySelector("#game_container");
 const container = document.querySelector(".container");
 const startknap_mobil = document.querySelector(".mobil_start");
@@ -54,12 +55,10 @@ function windowClicked(e) {
   if (action === "remove") {
     //console.log("if statement kørt");
     removeElement(e);
-    incrementCounter();
+    trashCollected();
   }
   if (action === "start") {
     showRules();
-    // startGame();
-    // changeSVGbgColor();
   }
 
   if (action === "mobil_start") {
@@ -134,10 +133,10 @@ function startGame() {
   //console.log("startGame kørt");
   document.querySelector(".regler").style.opacity = "0";
   document.querySelector(".regler").style.pointerEvents = "none";
-
   // Can this be done by using forEach? note the delay!
   playerHealthStatus();
   findTrashElements();
+  ambientSoundEffect();
 }
 
 function findTrashElements() {
@@ -188,11 +187,12 @@ function playerHealthStatus() {
     element.addEventListener("transitionend", () => {
       element.style.pointerEvents = "none";
       if (element.dataset.status === "trash") {
-        console.log("te called");
         playerHealth--;
+        element.dataset.status = "fallentrash";
+        impactSoundEffect();
         decreaseHealth();
         checkHealth();
-        //console.log(playerHealth);
+        gameStatus();
       }
     });
   });
@@ -206,6 +206,15 @@ function decreaseHealth() {
   heart[playerHealth].style.opacity = "0.2";
 }
 
+function gameWon() {
+  console.log("gameWon kørt");
+  document.querySelector("#game_container").style.transitionDuration = "1s";
+  document.querySelector("#game_container").style.opacity = "0";
+  document.querySelector("#game_container").style.pointerEvents = "none";
+
+  ambientSoundEffect();
+}
+
 function gameOver() {
   //
   const elementArray = document.querySelectorAll("[data-status=trash]");
@@ -213,6 +222,8 @@ function gameOver() {
     element.dataset.status = "clean";
   });
   console.log("gameover");
+
+  ambientSoundEffect();
 
   document.querySelector(".gameover").style.opacity = "1";
   document.querySelector(".gameover").style.pointerEvents = "all";
@@ -251,8 +262,16 @@ function resetGame() {
   document.querySelector(".start").style.opacity = "1";
   document.querySelector(".start").style.pointerEvents = "all";
 
+  document.querySelector(".regler").style.opacity = "1";
+  document.querySelector(".regler").style.pointerEvents = "all";
+
+  console.log(soundOn);
+
   playerHealth = 3;
   collectedTrash = 0;
+  soundOn = false;
+
+  console.log(soundOn);
 
   //console.log(playerHealth, collectedTrash);
 
@@ -265,12 +284,15 @@ function removeElement(e) {
   // add if statement that defines that if the element is too far down on the page then it can't be clicked
   e.target.dataset.status = "clean";
   e.target.style.backgroundImage = 'url("bubbles.png")';
+  bubbleSoundEffect();
   // reset placement to be the original one
   let elemXpos = e.target.getBoundingClientRect().x;
   let gameContainerXpos = gameContainer.getBoundingClientRect().x;
   //console.log(elemXpos);
   e.target.style.transform = `translate(${elemXpos -
     gameContainerXpos}px, -200px)`;
+
+  gameStatus();
 }
 
 function impactSoundEffect() {
@@ -279,21 +301,38 @@ function impactSoundEffect() {
 }
 function bubbleSoundEffect() {
   var bubbles = document.getElementById("audio_1");
+  bubbles.volume = 0.5;
   bubbles.play();
 }
-
 function ambientSoundEffect() {
-  var ambience = document.getElementById("audio_1");
-  ambience.play();
+  var ambience = document.getElementById("audio_3");
+
+  ambience.loop = true;
+  if (soundOn == false) {
+    ambience.play();
+  } else {
+    ambience.pause();
+  }
+
+  soundOn = true;
 }
 
-function incrementCounter() {
+function gameStatus() {
+  const trashArray = document.querySelectorAll("[data-status=trash]");
+
+  console.log(trashArray.length);
+
+  if (trashArray.length === 0 && !isGameOver) {
+    gameWon();
+  }
+}
+
+function trashCollected() {
+  console.log("trashCollected kørt");
   collectedTrash++;
   const scoreStatus = document.querySelector("#score h1");
   scoreStatus.textContent = "";
   scoreStatus.textContent = collectedTrash + "/31";
-  // Add counter to field in HTML to show amount of pieces collected
-  // //console.log(collectedTrash);
 }
 
 const deactivateElement = function(myElement) {
