@@ -20,7 +20,7 @@
   </head>
   <body>
     <section class="section1">
-      <div class="container">
+      <div class="container" data-action="luk_spil">
         <div class="lukknap" data-action="luk_spil">X</div>
         <div class="container_content" id="game_container">
           <div id="score">
@@ -76,7 +76,7 @@
           </div>
 
           <label class="terms">
-            <input type="checkbox" id="terms" required />
+            <input type="checkbox" name="terms" id="terms" required />
 
             Jeg accepterer Danske Spils vilkår og betingelser
             <a
@@ -85,8 +85,14 @@
             >
           </label>
 
-          <div class="knap submit" type="submit" data-action="submit"></div>
+          <input class="submit" type="submit" data-action="submit">
+        </input>
+        <div class="meddelelse">
+          <p>Tak! Du stilles nu videre til Spillehjørnets forside.</p>
+          <div class="terning"></div>
+        </div>
         </form>
+      
       </div>
 
       <div class="logo">

@@ -2,6 +2,8 @@
 
 const form = document.querySelector("form");
 
+const inputFields = document.querySelectorAll("input");
+
 window.addEventListener("load", init);
 
 function init() {
@@ -39,15 +41,17 @@ function inputBlur(e) {
   }
 }
 
-form.addEventListener(".submit", e => {
+form.addEventListener("submit", e => {
   console.log("submitted");
   e.preventDefault();
   const payload = {
     navn: form.elements.navn.value,
     email: form.elements.email.value,
-    terms: form.elements.checked
+    terms: form.elements.terms.checked
   };
   post(payload);
+  form.reset();
+  visMeddelelse();
 });
 
 function post(newSubmit) {
@@ -62,9 +66,20 @@ function post(newSubmit) {
       "cache-control": "no-cache"
     },
     body: postData
-  })
-    .then(res => res.json())
-    .then(data => {
-      form.reset();
-    });
+  });
+}
+
+function visMeddelelse() {
+  console.log("visMeddelelse");
+
+  document.querySelector(".meddelelse").style.opacity = "1";
+
+  setTimeout(goToFrontPage, 2500);
+}
+
+function goToFrontPage() {
+  console.log("goToFrontPage");
+
+  window.location =
+    "https://danskespil.dk/spillehjoernet?intcmp=top_menu_spillehjoernet_brand";
 }
