@@ -116,6 +116,8 @@ function lukMobilFormat() {
   document.querySelector("body").style.overflow = "initial";
   activateElement(startknap_mobil);
   deactivateElement(genstart_knap);
+
+  resetGame();
 }
 function showRules() {
   //console.log("showRules");
@@ -293,3 +295,13 @@ function incrementCounter() {
   // Add counter to field in HTML to show amount of pieces collected
   // //console.log(collectedTrash);
 }
+
+const deactivateElement = function(myElement) {
+  myElement.style.opacity = "0";
+  myElement.style.pointerEvents = "none";
+};
+
+const activateElement = function(myElement) {
+  myElement.style.opacity = "1";
+  myElement.style.pointerEvents = "all";
+};

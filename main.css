@@ -756,7 +756,7 @@ body {
     margin-left: 634.5px;
   }
 }
-@media only screen and (min-width: 1010px) {
+@media only screen and (min-width: 950px) {
   .koral4 {
     background-image: url(static/stor_koral.svg);
     width: 38vw;
@@ -768,7 +768,7 @@ body {
     opacity: 0.9;
   }
 }
-@media only screen and (min-width: 1010px) {
+@media only screen and (min-width: 1200px) {
   .koral4 {
     width: 456px;
     height: 816px;
