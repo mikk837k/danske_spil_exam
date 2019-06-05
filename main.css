@@ -767,6 +767,7 @@ body {
     justify-self: end;
     margin-top: 2vw;
     opacity: 0.9;
+    z-index: 1;
   }
 }
 @media only screen and (min-width: 1200px) {
