@@ -374,6 +374,7 @@ body {
   opacity: 0.9;
   filter: drop-shadow(3px 3px 3px rgb(41, 41, 41));
   transition: 0.5s;
+  cursor: grab;
 }
 .start {
   display: none;
@@ -391,7 +392,8 @@ body {
 }
 
 .knap:hover,
-.submit:hover {
+.submit:hover,
+.facebook_knap:hover {
   opacity: 1;
   transform: scale(1.1);
 }
@@ -1002,6 +1004,7 @@ body {
   font-weight: bold;
   font-size: 25px;
   font-family: var(--font_primary);
+  cursor: grab;
 }
 
 .lukknap:hover {
@@ -1075,6 +1078,7 @@ body {
   background-color: var(--color_purple);
   background-image: url(static/form_baggrund.svg);
   z-index: 2;
+  /* z-index: 30; */
   display: grid;
   grid-template-rows: 20px 230px 110px 50px 10px 50px 60px auto 20px;
   grid-template-columns: 12% 76% 12%;
@@ -1481,6 +1485,23 @@ input.submit {
   }
 }
 
+.deling {
+  width: 375px;
+  height: 667px;
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 8;
+  background-image: url(static/form_baggrund.svg);
+  background-size: 100%;
+  z-index: 2;
+  align-self: center;
+  justify-self: center;
+  font-size: 32px;
+  color: white;
+  transition: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .meddelelse {
   grid-column: 1 / span 3;
   grid-row: 1 / span 8;
@@ -1495,9 +1516,36 @@ input.submit {
   opacity: 0;
   pointer-events: none;
 }
-.meddelelse p {
+
+.meddelelse p,
+.deling p {
   margin: 200px 40px 0 40px;
   text-align: center;
+}
+.facebook_knap {
+  background-image: url(static/facebook_knap.svg);
+  background-size: 100%;
+  width: 275px;
+  height: 50px;
+  margin: 0 auto;
+  margin-top: 40px;
+  filter: drop-shadow(3px 3px 3px rgb(41, 41, 41));
+  opacity: 0.9;
+}
+
+p.nejtak {
+  font-size: 25px;
+  font-weight: 300;
+  text-decoration: underline;
+  color: var(--color_purple);
+  filter: brightness(50%);
+  text-align: center;
+  margin: 30px 40px 0 40px;
+}
+
+.nejtak:hover {
+  color: white;
+  filter: brightness(100%);
 }
 
 .terning {
@@ -1506,4 +1554,9 @@ input.submit {
   width: 150px;
   height: 150px;
   margin: 50px auto;
+}
+
+.element,
+.facebook_knap {
+  cursor: grab;
 }
