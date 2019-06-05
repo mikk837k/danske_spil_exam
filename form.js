@@ -51,7 +51,8 @@ form.addEventListener("submit", e => {
   };
   post(payload);
   form.reset();
-  visMeddelelse();
+  visDeling();
+  // visMeddelelse();
 });
 
 function post(newSubmit) {
@@ -68,7 +69,13 @@ function post(newSubmit) {
     body: postData
   });
 }
+function visDeling() {
+  console.log("visDeling");
+  document.querySelector(".deling").style.opacity = "1";
+  document.querySelector(".deling").style.pointerEvents = "all";
 
+  document.querySelector(".nejtak").addEventListener("click", visMeddelelse);
+}
 function visMeddelelse() {
   console.log("visMeddelelse");
 
