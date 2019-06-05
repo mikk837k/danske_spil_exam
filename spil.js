@@ -16,16 +16,16 @@ const startknap_mobil = document.querySelector(".mobil_start");
 const genstart_knap = document.querySelector(".genstart");
 
 function init() {
+  // Eventlistener som lytter på alle mousedown events på body
+  document.querySelector("body").addEventListener("mousedown", windowClicked);
+  buildGame();
+}
+
+function buildGame() {
   //Sætter status for antal skrald det er muligt at samle til at være lig antal elementer i JSON filen
   const scoreStatus = document.querySelector("#score h1");
   scoreStatus.textContent = "0/" + myJsonImport.length;
 
-  // Eventlistener som lytter på alle mousedown events på body
-  document.querySelector("body").addEventListener("mousedown", windowClicked);
-  createElements();
-}
-
-function createElements() {
   //Skaber et html element udfra hvert element tilstede i JSON filen
   myJsonImport.forEach(element => {
     let newDiv = document.createElement("div");
@@ -265,7 +265,7 @@ function resetGame() {
   activateElement(startKnap);
   activateElement(reglerLag);
 
-  createElements();
+  buildGame();
   setTimeout(showRules, 300);
 }
 
