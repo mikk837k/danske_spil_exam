@@ -267,36 +267,19 @@ function resetGame() {
   scoreStatus.textContent = "";
   scoreStatus.textContent = "0/31";
   isGameOver = false;
-
-  const gameoverLag = document.querySelector(".gameover");
-  // document.querySelector(".gameover").style.opacity = "0";
-  // document.querySelector(".gameover").style.pointerEvents = "none";
-
-  deactivateElement(gameoverLag);
-  // document.querySelector(".genstart").style.opacity = "0";
-  // document.querySelector(".genstart").style.pointerEvents = "none";
-
-  deactivateElement(genstart_knap);
-
-  const startKnap = document.querySelector(".start");
-  // document.querySelector(".start").style.opacity = "1";
-  // document.querySelector(".start").style.pointerEvents = "all";
-  activateElement(startKnap);
-
-  const reglerLag = document.querySelector(".regler");
-  // document.querySelector(".regler").style.opacity = "1";
-  // document.querySelector(".regler").style.pointerEvents = "all";
-  activateElement(reglerLag);
-
-  //console.log(soundOn);
-
   playerHealth = 3;
   collectedTrash = 0;
   soundOn = false;
 
-  //console.log(soundOn);
+  const gameoverLag = document.querySelector(".gameover");
+  const startKnap = document.querySelector(".start");
+  const reglerLag = document.querySelector(".regler");
 
-  ////console.log(playerHealth, collectedTrash);
+  deactivateElement(gameoverLag);
+  deactivateElement(genstart_knap);
+  activateElement(startKnap);
+  activateElement(reglerLag);
+
   createElements();
   setTimeout(showRules, 300);
 }
