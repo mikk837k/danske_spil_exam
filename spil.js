@@ -251,6 +251,8 @@ function resetGame() {
     "[data-health=no-damage] svg .heart_cls-1"
   );
 
+  ambientSoundEffect();
+
   heart.forEach(heart => {
     heart.style.fill = "#c1507a";
   });
@@ -306,7 +308,7 @@ function ambientSoundEffect() {
   var ambience = document.getElementById("audio_3");
 
   ambience.loop = true;
-  if (soundOn == false) {
+  if (!soundOn) {
     ambience.play();
   } else {
     ambience.pause();
