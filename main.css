@@ -1562,3 +1562,7 @@ p.nejtak {
 .facebook_knap {
   cursor: grab;
 }
+
+.liste {
+  margin: 20px 0 40px 0;
+}
