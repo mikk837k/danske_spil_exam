@@ -3,8 +3,7 @@
 window.addEventListener("DOMContentLoaded", init);
 
 import myJsonImport from "/static/garbage.json";
-
-// ////////console.log(myJsonImport);
+import is from "is_js";
 
 let action = "";
 let playerHealth = 3;
@@ -18,26 +17,25 @@ const startknap_mobil = document.querySelector(".mobil_start");
 const genstart_knap = document.querySelector(".genstart");
 
 function init() {
-  ////console.log("init kørt");
-  // ////console.log(myJsonImport);
-  document.querySelector("body").addEventListener("mousedown", windowClicked);
+  // Eventlistener som lytter på alle mousedown events på body
+  console.log(is.mobile());
+  if (is.mobile() || is.tablet()) {
+    document
+      .querySelector("body")
+      .addEventListener("touchstart", windowClicked);
+  } else {
+    document.querySelector("body").addEventListener("mousedown", windowClicked);
+  }
 
-  // HUSK AT SLETTE NEDENSTÅENDE
-  // getJSON();
-  // createElements();
-  createElements();
+  buildGame();
 }
 
-// function getJSON() {
-//   fetch("garbage.json")
-//     .then(jsonData => jsonData.json())
-//     .then(jsonData => {
-//       myJSON = jsonData;
-//       createElements();
-//     });
-// }
+function buildGame() {
+  //Sætter status for antal skrald det er muligt at samle til at være lig antal elementer i JSON filen
+  const scoreStatus = document.querySelector("#score h1");
+  scoreStatus.textContent = "0/" + myJsonImport.length;
 
-function createElements() {
+  //Skaber et html element udfra hvert element tilstede i JSON filen
   myJsonImport.forEach(element => {
     let newDiv = document.createElement("div");
     newDiv.classList.add("element");
@@ -50,11 +48,10 @@ function createElements() {
 }
 
 function windowClicked(e) {
-  ////console.log("windowclicked kørt");
+  // Holder øje med om der er klikket på et element med datasettet "action" og ud fra datasettets værdi kørers en eller flere tilhørende funktioner
   action = e.target.dataset.action;
 
   if (action === "remove") {
-    ////console.log("if statement kørt");
     removeElement(e);
     trashCollected();
   }
@@ -67,7 +64,7 @@ function windowClicked(e) {
     showRules();
   }
 
-  if (isGameWon && action === "mobil_start") {
+  if (isGameWon == true && action === "mobil_start") {
     mobilFormat();
     showSignUp();
   }
@@ -78,45 +75,36 @@ function windowClicked(e) {
 
   if (action === "genstart") {
     resetGame();
+    setTimeout(showRules, 300);
   }
-
-  ////console.log(action);
 }
 
 function placeElements() {
+  // Finder samtlige elementer med datasettet "trash" og placere elementerne på x og y aksen
   const elementArray = document.querySelectorAll("[data-status=trash]");
-
-  ////console.log(gameContainer.clientWidth);
-
-  // place elements randomly on X axis using transform translate
   for (let counter = 0; counter < elementArray.length; counter++) {
-    let stringifyNumb = getCoordinateWithinBox(
+    let xPos = getCoordinateWithinBox(
       gameContainer,
       elementArray[counter]
     ).toString();
 
-    elementArray[
-      counter
-    ].style.transform = `translate(${stringifyNumb}px, -200px)`;
+    elementArray[counter].style.transform = `translate(${xPos}px, -200px)`;
   }
 }
 
 function getCoordinateWithinBox(container, elem) {
+  //Udregner en tilfældig værdi med udgangspunkt i forældre containerens bredde, elementets bredde som ganges med et tilfældigt tal.
+  //Resultatet sendes retur og er udgangspunktet for placering af elementet på X aksen.
   return Math.floor(Math.random() * (container.clientWidth - elem.clientWidth));
 }
 
 function mobilFormat() {
-  ////console.log("mobilFormat");
   container.style.height = "auto";
-
   activateElement(container);
-
   document.querySelector("body").style.overflow = "hidden";
   deactivateElement(startknap_mobil);
 }
 function lukMobilFormat() {
-  ////console.log("lukMobilFormat");
-
   deactivateElement(container);
   document.querySelector("body").style.overflow = "initial";
   activateElement(startknap_mobil);
@@ -125,38 +113,40 @@ function lukMobilFormat() {
   resetGame();
 }
 function showRules() {
-  ////console.log("showRules");
-  document.querySelector(".spil_forside").style.opacity = "0";
-  document.querySelector(".spil_forside").style.pointerEvents = "none";
+  //Funktion som viser regelsiden
+  const spilForside = document.querySelector(".spil_forside");
+  const startKnap = document.querySelector(".start");
 
-  document.querySelector(".start").style.opacity = "0";
-  document.querySelector(".start").style.pointerEvents = "none";
+  deactivateElement(spilForside);
+  deactivateElement(startKnap);
 
   setTimeout(startGame, 4000);
 }
 
 function showSignUp() {
-  document.querySelector("#game_container").style.opacity = "0";
-  document.querySelector("#game_container").style.pointerEvents = "none";
-  document.querySelector(".regler").style.opacity = "0";
-  document.querySelector(".regler").style.pointerEvents = "none";
-  document.querySelector(".spil_forside").style.opacity = "0";
-  document.querySelector(".spil_forside").style.pointerEvents = "none";
-  document.querySelector(".gameover").style.opacity = "0";
-  document.querySelector(".gameover").style.pointerEvents = "none";
+  // Viser signup siden
+  const spilForside = document.querySelector(".spil_forside");
+  const gameOver = document.querySelector(".gameover");
+  const reglerLag = document.querySelector(".regler");
+
+  deactivateElement(gameContainer);
+  deactivateElement(reglerLag);
+  deactivateElement(spilForside);
+  deactivateElement(gameOver);
 }
 
 function startGame() {
-  ////console.log("startGame kørt");
-  document.querySelector(".regler").style.opacity = "0";
-  document.querySelector(".regler").style.pointerEvents = "none";
-  // Can this be done by using forEach? note the delay!
+  //Starter spillet
+  const reglerLag = document.querySelector(".regler");
+  deactivateElement(reglerLag);
+
   playerHealthStatus();
-  findTrashElements();
+  getTrashElements();
   ambientSoundEffect();
 }
 
-function findTrashElements() {
+function getTrashElements() {
+  //Finder alle elementerne med datasettet "trash" og sender et element afsted ad gangen med en forsinkelse vha. settimeout.
   const elementArray = document.querySelectorAll("[data-status=trash]");
   for (let counter = 0; counter < elementArray.length; counter++) {
     setTimeout(() => {
@@ -166,7 +156,7 @@ function findTrashElements() {
   }
 }
 function checkHealth() {
-  //console.log(isGameOver, playerHealth);
+  //Holder styr på spillerens liv og status på spillet
   if (!isGameOver && playerHealth === 0) {
     isGameOver = true;
     gameOver();
@@ -174,7 +164,9 @@ function checkHealth() {
 }
 
 function addAnimationToElement(element, counter) {
-  // ////console.log(element);
+  //Tilføjer animation til elementet som er sendt afsted fra getTrashElements().
+  //Derudover holdes der øje med counteren og ud fra dennes værdi tilføjes forskellige klasser til elementet.
+  //Klasserne definerer hastigheden for det nedfaldne skrald
   let Xpos = element.getBoundingClientRect().x;
   let gameContainerXpos = gameContainer.getBoundingClientRect().x;
 
@@ -191,14 +183,14 @@ function addAnimationToElement(element, counter) {
     element.style.transform = `translate(${Xpos - gameContainerXpos}px, 580px)`;
     element.classList.add("float_speed_3");
   }
-  if (counter >= 16 && counter <= 31) {
+  if (counter >= 16 && counter <= 25) {
     element.style.transform = `translate(${Xpos - gameContainerXpos}px, 580px)`;
     element.classList.add("float_speed_4");
   }
 }
 
 function playerHealthStatus() {
-  //console.log("playerHealthStatus");
+  //Lytter på elementer med datasettet "trash", om deres transition er slut og hvis den er så falder spillerens liv
   const elementArray = document.querySelectorAll("[data-status=trash]");
   elementArray.forEach(element => {
     element.addEventListener("transitionend", () => {
@@ -216,6 +208,8 @@ function playerHealthStatus() {
 }
 
 function decreaseHealth() {
+  //Finder alle elementer med datasettet "no-damage".
+  //Spillerens liv (et nummer) bruges til at finde index nummeret på det hjerte element som skal have ændret opacity.
   const heart = document.querySelectorAll(
     "[data-health=no-damage] svg .heart_cls-1"
   );
@@ -224,33 +218,33 @@ function decreaseHealth() {
 }
 
 function gameWon() {
-  //console.log("gameWon kørt");
+  //Skjuler spillet når det er gennemført
   document.querySelector("#game_container").style.transitionDuration = "1s";
-  document.querySelector("#game_container").style.opacity = "0";
-  document.querySelector("#game_container").style.pointerEvents = "none";
+
+  deactivateElement(gameContainer);
+
   isGameWon = true;
   ambientSoundEffect();
 }
 
 function gameOver() {
-  //
+  //Finder alle elementer med datasettet "trash" og ændre deres dataset værdi til "clean"
   const elementArray = document.querySelectorAll("[data-status=trash]");
   elementArray.forEach(element => {
     element.dataset.status = "clean";
   });
-  //console.log("gameover");
 
   ambientSoundEffect();
 
-  document.querySelector(".gameover").style.opacity = "1";
-  document.querySelector(".gameover").style.pointerEvents = "all";
+  const gameoverLag = document.querySelector(".gameover");
+  const genstartKnap = document.querySelector(".genstart");
 
-  document.querySelector(".genstart").style.opacity = "1";
-  document.querySelector(".genstart").style.pointerEvents = "all";
+  activateElement(gameoverLag);
+  activateElement(genstartKnap);
 }
 
 function resetGame() {
-  ////console.log("restergame kørt");
+  //Nulstiller spillet og gør det klar til at kunne spilles igen
   const trashArray = document.querySelectorAll(".element");
   const scoreStatus = document.querySelector("#score h1");
   const heart = document.querySelectorAll(
@@ -267,51 +261,29 @@ function resetGame() {
   scoreStatus.textContent = "";
   scoreStatus.textContent = "0/31";
   isGameOver = false;
-
-  const gameoverLag = document.querySelector(".gameover");
-  // document.querySelector(".gameover").style.opacity = "0";
-  // document.querySelector(".gameover").style.pointerEvents = "none";
-
-  deactivateElement(gameoverLag);
-  // document.querySelector(".genstart").style.opacity = "0";
-  // document.querySelector(".genstart").style.pointerEvents = "none";
-
-  deactivateElement(genstart_knap);
-
-  const startKnap = document.querySelector(".start");
-  // document.querySelector(".start").style.opacity = "1";
-  // document.querySelector(".start").style.pointerEvents = "all";
-  activateElement(startKnap);
-
-  const reglerLag = document.querySelector(".regler");
-  // document.querySelector(".regler").style.opacity = "1";
-  // document.querySelector(".regler").style.pointerEvents = "all";
-  activateElement(reglerLag);
-
-  //console.log(soundOn);
-
   playerHealth = 3;
   collectedTrash = 0;
   soundOn = false;
 
-  //console.log(soundOn);
+  const gameoverLag = document.querySelector(".gameover");
+  const startKnap = document.querySelector(".start");
+  const reglerLag = document.querySelector(".regler");
 
-  ////console.log(playerHealth, collectedTrash);
-  createElements();
-  setTimeout(showRules, 300);
+  deactivateElement(gameoverLag);
+  deactivateElement(genstart_knap);
+  activateElement(startKnap);
+  activateElement(reglerLag);
+
+  buildGame();
 }
 
 function removeElement(e) {
-  // ////console.log(e);
-  // ////console.log("removeElement kørt");
-  // add if statement that defines that if the element is too far down on the page then it can't be clicked
+  //Udskifter baggrundsbilledet for elementet, ændre datasettet til "clean", ændre positionen for elementet
   e.target.dataset.status = "clean";
   e.target.style.backgroundImage = 'url("bubbles.png")';
   bubbleSoundEffect();
-  // reset placement to be the original one
   let elemXpos = e.target.getBoundingClientRect().x;
   let gameContainerXpos = gameContainer.getBoundingClientRect().x;
-  ////console.log(elemXpos);
   e.target.style.transform = `translate(${elemXpos -
     gameContainerXpos}px, -200px)`;
 
@@ -319,15 +291,18 @@ function removeElement(e) {
 }
 
 function impactSoundEffect() {
+  //afspiller lyd
   var impact = document.getElementById("audio_2");
   impact.play();
 }
 function bubbleSoundEffect() {
+  //afspiller lyd
   var bubbles = document.getElementById("audio_1");
   bubbles.volume = 0.5;
   bubbles.play();
 }
 function ambientSoundEffect() {
+  //afspiller lyd
   var ambience = document.getElementById("audio_3");
 
   ambience.loop = true;
@@ -341,29 +316,29 @@ function ambientSoundEffect() {
 }
 
 function gameStatus() {
+  //Holder styr på elementernes status og checker om spillet er vundet
   const trashArray = document.querySelectorAll("[data-status=trash]");
-
-  //console.log(trashArray.length);
-
   if (trashArray.length === 0 && !isGameOver) {
     gameWon();
   }
 }
 
 function trashCollected() {
-  //console.log("trashCollected kørt");
+  //Holder styr på samlet affald og skiver det ud
   collectedTrash++;
   const scoreStatus = document.querySelector("#score h1");
   scoreStatus.textContent = "";
-  scoreStatus.textContent = collectedTrash + "/31";
+  scoreStatus.textContent = collectedTrash + "/" + myJsonImport.length;
 }
 
 const deactivateElement = function(myElement) {
+  //Ændre style på det medtaget element
   myElement.style.opacity = "0";
   myElement.style.pointerEvents = "none";
 };
 
 const activateElement = function(myElement) {
+  //Ændre style på det medtaget element
   myElement.style.opacity = "1";
   myElement.style.pointerEvents = "all";
 };
