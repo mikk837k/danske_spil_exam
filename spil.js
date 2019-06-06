@@ -214,7 +214,7 @@ function decreaseHealth() {
     "[data-health=no-damage] svg .heart_cls-1"
   );
 
-  heart[playerHealth].style.opacity = "0.2";
+  heart[playerHealth].style.fill = "#c1507a31";
 }
 
 function gameWon() {
@@ -252,7 +252,7 @@ function resetGame() {
   );
 
   heart.forEach(heart => {
-    heart.style.opacity = "1";
+    heart.style.fill = "#c1507a";
   });
 
   trashArray.forEach(element => {
