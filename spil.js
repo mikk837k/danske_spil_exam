@@ -3,6 +3,7 @@
 window.addEventListener("DOMContentLoaded", init);
 
 import myJsonImport from "/static/garbage.json";
+import is from "is_js";
 
 let action = "";
 let playerHealth = 3;
@@ -17,7 +18,15 @@ const genstart_knap = document.querySelector(".genstart");
 
 function init() {
   // Eventlistener som lytter på alle mousedown events på body
-  document.querySelector("body").addEventListener("mousedown", windowClicked);
+  console.log(is.mobile());
+  if (is.mobile()) {
+    document
+      .querySelector("body")
+      .addEventListener("touchstart", windowClicked);
+  } else {
+    document.querySelector("body").addEventListener("mousedown", windowClicked);
+  }
+
   buildGame();
 }
 
@@ -51,17 +60,11 @@ function windowClicked(e) {
   }
 
   if (!isGameWon && action === "mobil_start") {
-    console.log(action);
-    console.log("jeg er i den første if statement");
-    console.log("isgamewon er", isGameWon);
     mobilFormat();
     showRules();
   }
 
   if (isGameWon == true && action === "mobil_start") {
-    console.log(action);
-    console.log("jeg er i den anden if statement");
-    console.log("isgamewon er", isGameWon);
     mobilFormat();
     showSignUp();
   }
@@ -74,7 +77,6 @@ function windowClicked(e) {
     resetGame();
     setTimeout(showRules, 300);
   }
-  console.log(action);
 }
 
 function placeElements() {
@@ -112,7 +114,6 @@ function lukMobilFormat() {
 }
 function showRules() {
   //Funktion som viser regelsiden
-  console.log("showrules kørt");
   const spilForside = document.querySelector(".spil_forside");
   const startKnap = document.querySelector(".start");
 
@@ -228,8 +229,6 @@ function gameWon() {
 
 function gameOver() {
   //Finder alle elementer med datasettet "trash" og ændre deres dataset værdi til "clean"
-
-  console.log("gameover kørt");
   const elementArray = document.querySelectorAll("[data-status=trash]");
   elementArray.forEach(element => {
     element.dataset.status = "clean";
