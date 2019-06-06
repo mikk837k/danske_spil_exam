@@ -1546,6 +1546,7 @@ p.nejtak {
 .nejtak:hover {
   color: white;
   filter: brightness(100%);
+  cursor: pointer;
 }
 
 .terning {

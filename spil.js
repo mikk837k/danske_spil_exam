@@ -51,11 +51,17 @@ function windowClicked(e) {
   }
 
   if (!isGameWon && action === "mobil_start") {
+    console.log(action);
+    console.log("jeg er i den første if statement");
+    console.log("isgamewon er", isGameWon);
     mobilFormat();
     showRules();
   }
 
-  if (isGameWon && action === "mobil_start") {
+  if (isGameWon == true && action === "mobil_start") {
+    console.log(action);
+    console.log("jeg er i den anden if statement");
+    console.log("isgamewon er", isGameWon);
     mobilFormat();
     showSignUp();
   }
@@ -66,7 +72,9 @@ function windowClicked(e) {
 
   if (action === "genstart") {
     resetGame();
+    setTimeout(showRules, 300);
   }
+  console.log(action);
 }
 
 function placeElements() {
@@ -104,34 +112,33 @@ function lukMobilFormat() {
 }
 function showRules() {
   //Funktion som viser regelsiden
-  document.querySelector(".spil_forside").style.opacity = "0";
-  document.querySelector(".spil_forside").style.pointerEvents = "none";
+  console.log("showrules kørt");
+  const spilForside = document.querySelector(".spil_forside");
+  const startKnap = document.querySelector(".start");
 
-  document.querySelector(".start").style.opacity = "0";
-  document.querySelector(".start").style.pointerEvents = "none";
+  deactivateElement(spilForside);
+  deactivateElement(startKnap);
 
   setTimeout(startGame, 4000);
 }
 
 function showSignUp() {
   // Viser signup siden
-  document.querySelector("#game_container").style.opacity = "0";
-  document.querySelector("#game_container").style.pointerEvents = "none";
+  const spilForside = document.querySelector(".spil_forside");
+  const gameOver = document.querySelector(".gameover");
+  const reglerLag = document.querySelector(".regler");
 
-  document.querySelector(".regler").style.opacity = "0";
-  document.querySelector(".regler").style.pointerEvents = "none";
-
-  document.querySelector(".spil_forside").style.opacity = "0";
-  document.querySelector(".spil_forside").style.pointerEvents = "none";
-
-  document.querySelector(".gameover").style.opacity = "0";
-  document.querySelector(".gameover").style.pointerEvents = "none";
+  deactivateElement(gameContainer);
+  deactivateElement(reglerLag);
+  deactivateElement(spilForside);
+  deactivateElement(gameOver);
 }
 
 function startGame() {
   //Starter spillet
-  document.querySelector(".regler").style.opacity = "0";
-  document.querySelector(".regler").style.pointerEvents = "none";
+  const reglerLag = document.querySelector(".regler");
+  deactivateElement(reglerLag);
+
   playerHealthStatus();
   getTrashElements();
   ambientSoundEffect();
@@ -212,14 +219,17 @@ function decreaseHealth() {
 function gameWon() {
   //Skjuler spillet når det er gennemført
   document.querySelector("#game_container").style.transitionDuration = "1s";
-  document.querySelector("#game_container").style.opacity = "0";
-  document.querySelector("#game_container").style.pointerEvents = "none";
+
+  deactivateElement(gameContainer);
+
   isGameWon = true;
   ambientSoundEffect();
 }
 
 function gameOver() {
   //Finder alle elementer med datasettet "trash" og ændre deres dataset værdi til "clean"
+
+  console.log("gameover kørt");
   const elementArray = document.querySelectorAll("[data-status=trash]");
   elementArray.forEach(element => {
     element.dataset.status = "clean";
@@ -227,11 +237,11 @@ function gameOver() {
 
   ambientSoundEffect();
 
-  document.querySelector(".gameover").style.opacity = "1";
-  document.querySelector(".gameover").style.pointerEvents = "all";
+  const gameoverLag = document.querySelector(".gameover");
+  const genstartKnap = document.querySelector(".genstart");
 
-  document.querySelector(".genstart").style.opacity = "1";
-  document.querySelector(".genstart").style.pointerEvents = "all";
+  activateElement(gameoverLag);
+  activateElement(genstartKnap);
 }
 
 function resetGame() {
@@ -266,7 +276,6 @@ function resetGame() {
   activateElement(reglerLag);
 
   buildGame();
-  setTimeout(showRules, 300);
 }
 
 function removeElement(e) {
