@@ -19,7 +19,7 @@ const genstart_knap = document.querySelector(".genstart");
 function init() {
   // Eventlistener som lytter på alle mousedown events på body
   console.log(is.mobile());
-  if (is.mobile()) {
+  if (is.mobile() || is.tablet()) {
     document
       .querySelector("body")
       .addEventListener("touchstart", windowClicked);
