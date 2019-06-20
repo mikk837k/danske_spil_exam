@@ -26,8 +26,6 @@ function init() {
   } else {
     document.querySelector("body").addEventListener("mousedown", windowClicked);
   }
-
-  buildGame();
 }
 
 function buildGame() {
@@ -45,21 +43,25 @@ function buildGame() {
     gameContainer.appendChild(newDiv);
   });
   placeElements();
+  randomStartPos();
 }
 
 function windowClicked(e) {
   // Holder øje med om der er klikket på et element med datasettet "action" og ud fra datasettets værdi kørers en eller flere tilhørende funktioner
   action = e.target.dataset.action;
+  console.log(action);
 
   if (action === "remove") {
     removeElement(e);
     trashCollected();
   }
   if (action === "start") {
+    buildGame();
     showRules();
   }
 
   if (!isGameWon && action === "mobil_start") {
+    buildGame();
     mobilFormat();
     showRules();
   }

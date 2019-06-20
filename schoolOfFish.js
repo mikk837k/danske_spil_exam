@@ -1,14 +1,14 @@
 "use strict";
 
-window.addEventListener("DOMContentLoaded", init);
+// window.addEventListener("DOMContentLoaded", init);
 const gameContainer = document.querySelector("#game_container");
 const schoolOfFish = document.querySelector("#school_of_fish");
 let elementIsToRight = true;
 let containerXpos = gameContainer.getBoundingClientRect().x;
 
 function init() {
-  //console.log("init");
-  randomStartPos();
+  console.log("file loaded");
+  //ensures file has been loaded
 }
 
 function randomStartPos() {
