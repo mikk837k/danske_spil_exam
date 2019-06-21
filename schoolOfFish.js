@@ -1,6 +1,6 @@
 "use strict";
 
-// window.addEventListener("DOMContentLoaded", init);
+// window.addEventListener("ready", init);
 const gameContainer = document.querySelector("#game_container");
 const schoolOfFish = document.querySelector("#school_of_fish");
 let elementIsToRight = true;
