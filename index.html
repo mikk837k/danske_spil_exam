@@ -4,20 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="Description" content="Støt kampen for klimaet sammen med Danske Spil. Fang alt det nedfaldne skrald i det interaktive spil og Danske Spil vil donere 25kr til projektet “Plastfrit Hav”. “Plastfrit Hav” er et partnerskab mellem Plastindustrien, Plastic Change og Det Økologiske Råd, der skal beskytte havmiljøet mod plastforurening.">
+    <meta
+      name="Description"
+      content="Støt kampen for klimaet sammen med Danske Spil. Fang alt det nedfaldne skrald i det interaktive spil og Danske Spil vil donere 25kr til projektet “Plastfrit Hav”. “Plastfrit Hav” er et partnerskab mellem Plastindustrien, Plastic Change og Det Økologiske Råd, der skal beskytte havmiljøet mod plastforurening."
+    />
     <title>Spillehjørnet - Danske Spil</title>
-    <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="spil.css" />
-    <!-- fonte -->
+    <!-- <link rel="stylesheet" href="main.css" /> -->
     <link
+      rel="preload"
+      href="main.css"
+      as="style"
+      onload="this.rel='stylesheet'"
+    />
+    <link
+      rel="preload"
+      href="spil.css"
+      as="style"
+      onload="this.rel='stylesheet'"
+    />
+    <!-- <link rel="stylesheet" href="spil.css" /> -->
+    <!-- <link
       href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,700,700i&display=swap"
       rel="stylesheet"
     />
     <link
       href="https://fonts.googleapis.com/css?family=Londrina+Solid:100,300,400,900&display=swap"
       rel="stylesheet"
-    />
-    <!-- fonte -->
+    /> -->
   </head>
   <body>
     <section class="section1">
@@ -27,22 +40,22 @@
         <div class="regler container_content"></div>
         <div class="gameover container_content"></div>
         <div class="container_content" id="game_container">
-            <div id="score">
-              <div class="trashcan"></div>
-              <h1></h1>
-            </div>
-            <div id="baggrund"></div>
-            <div id="school_of_fish"></div>
-            <div id="forgrund"></div>
-            <div id="seaweed"></div>
-            <div id="main_character"></div>
-  
-            <div id="healthBar">
-              <div class="heart" data-health="no-damage"></div>
-              <div class="heart" data-health="no-damage"></div>
-              <div class="heart" data-health="no-damage"></div>
-            </div>
+          <div id="score">
+            <div class="trashcan"></div>
+            <h1></h1>
           </div>
+          <div id="baggrund"></div>
+          <div id="school_of_fish"></div>
+          <div id="forgrund"></div>
+          <div id="seaweed"></div>
+          <div id="main_character"></div>
+
+          <div id="healthBar">
+            <div class="heart" data-health="no-damage"></div>
+            <div class="heart" data-health="no-damage"></div>
+            <div class="heart" data-health="no-damage"></div>
+          </div>
+        </div>
         <form class="form container_content">
           <h2 class="form_text1">
             <span class="tak">TAK</span> <br />fordi du tænker på miljøet
@@ -82,31 +95,32 @@
             Jeg accepterer Danske Spils vilkår og betingelser
             <a
               href="https://danskespil.dk/regler_og_vilkaar/vilkaar/vilkaar-dli"
-               target="_blank">(læs her)</a
+              target="_blank"
+              rel="noopener"
+              >(læs her)</a
             >
           </label>
 
-          <input class="submit" type="submit" data-action="submit">
-        </input>
-        <div class="deling">
-            <p>Tak. Del på Facebook, så dine venner også kan være med til at redde miljøet.</p>
-           <div class="facebook_knap"></div>
+          <input class="submit" type="submit" data-action="submit" />
+          <div class="deling">
+            <p>
+              Tak. Del på Facebook, så dine venner også kan være med til at
+              redde miljøet.
+            </p>
+            <div class="facebook_knap"></div>
             <p class="nejtak">Nej tak</p>
-        </div>
-        <div class="meddelelse">
-          <p>Du stilles nu videre til Spillehjørnets forside.</p>
-          <div class="terning"></div>
-        </div>
-       
+          </div>
+          <div class="meddelelse">
+            <p>Du stilles nu videre til Spillehjørnets forside.</p>
+            <div class="terning"></div>
+          </div>
         </form>
-      
       </div>
 
       <div class="logo">
         <a href="https://danskespil.dk/spillehjoernet">
           <img src="static/spillehjoernet_logo.png" alt="Spillehjørnets logo" />
         </a>
-       
       </div>
       <div class="logo_text">Udbydes af Danske Licens Spil A/S</div>
       <h1 class="text1">
@@ -166,9 +180,19 @@
     <audio id="audio_1" src="static/bubbles.mp3" preload="none"></audio>
     <audio id="audio_2" src="static/bump.mp3" preload="none"></audio>
     <audio id="audio_3" src="static/underWaterSound.mp3" preload="none"></audio>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: [
+            "Roboto Condensed:300,300i,400,700,700i&display=swap",
+            "Londrina Solid:100,300,400,900&display=swap"
+          ]
+        }
+      });
+    </script>
     <script src="main.js"></script>
     <script src="loadSVG.js"></script>
-    <!-- <script src="schoolOfFish.js"></script> -->
     <script src="form.js"></script>
     <script src="spil.js"></script>
   </body>

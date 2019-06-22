@@ -73,6 +73,7 @@ function windowClicked(e) {
     buildGame();
     mobilFormat();
     showRules();
+    randomStartPos();
   }
 
   if (isGameWon == true && action === "mobil_start") {
